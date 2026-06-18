@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Питание для спортсмена 45+</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f13;
+      color: #e8e8f0;
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 80px 40px 60px;
+      text-align: center;
+      border-bottom: 1px solid #ffffff10;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, #e94560 0%, transparent 60%);
+      opacity: 0.05;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #e9456020;
+      border: 1px solid #e9456050;
+      color: #e94560;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: #e94560; }
+    .hero-sub {
+      font-size: 16px;
+      color: #8888aa;
+      margin-bottom: 40px;
+    }
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .stat-chip {
+      background: #ffffff08;
+      border: 1px solid #ffffff15;
+      border-radius: 12px;
+      padding: 12px 24px;
+      text-align: center;
+    }
+    .stat-chip .val {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+    }
+    .stat-chip .lbl {
+      font-size: 11px;
+      color: #6666aa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .arrow-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #e9456015;
+      border: 1px solid #e9456030;
+      border-radius: 12px;
+      padding: 12px 20px;
+      color: #e94560;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .arrow-chip .arrow { font-size: 18px; }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* SECTION */
+    .section { margin-bottom: 64px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #e94560, #c73652);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: #6666aa;
+      margin-top: 2px;
+    }
+
+    /* CARDS GRID */
+    .cards { display: grid; gap: 16px; }
+    .cards-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .cards-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .cards-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+    .card {
+      background: #16161f;
+      border: 1px solid #ffffff0d;
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .card-accent { border-color: #e9456030; background: #e9456008; }
+    .card-green  { border-color: #22c55e30; background: #22c55e08; }
+    .card-blue   { border-color: #3b82f630; background: #3b82f608; }
+    .card-yellow { border-color: #f59e0b30; background: #f59e0b08; }
+
+    .card h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6666aa;
+      margin-bottom: 8px;
+    }
+    .card .big-num {
+      font-size: 36px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .card .big-num span { font-size: 16px; color: #8888aa; font-weight: 400; }
+    .card .desc {
+      font-size: 13px;
+      color: #8888aa;
+      margin-top: 8px;
+    }
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .card p { font-size: 14px; color: #aaaacc; }
+
+    /* TABLE */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .data-table th {
+      background: #1e1e2e;
+      color: #6666aa;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 12px 16px;
+      text-align: left;
+    }
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #ffffff08;
+      color: #ccccdd;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: #ffffff04; }
+    .data-table .highlight td { color: #fff; font-weight: 600; }
+    .data-table .total td {
+      background: #1e1e2e;
+      font-weight: 700;
+      color: #fff;
+      border-top: 1px solid #ffffff15;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-red    { background: #e9456020; color: #e94560; border: 1px solid #e9456040; }
+    .badge-green  { background: #22c55e20; color: #22c55e; border: 1px solid #22c55e40; }
+    .badge-blue   { background: #3b82f620; color: #60a5fa; border: 1px solid #3b82f640; }
+    .badge-yellow { background: #f59e0b20; color: #fbbf24; border: 1px solid #f59e0b40; }
+    .badge-stars  { background: #7c3aed20; color: #a78bfa; border: 1px solid #7c3aed40; }
+
+    /* TABLE WRAPPER */
+    .table-wrap {
+      background: #16161f;
+      border: 1px solid #ffffff0d;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* MACROS */
+    .macro-bar-wrap { margin-bottom: 20px; }
+    .macro-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .macro-bar-label .name { color: #ccccdd; font-weight: 600; }
+    .macro-bar-label .val  { color: #8888aa; }
+    .macro-bar-bg {
+      height: 8px;
+      background: #ffffff0d;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .macro-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+    .bar-protein { background: linear-gradient(90deg, #e94560, #ff6b6b); }
+    .bar-carbs   { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .bar-fat     { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: #ffffff10;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e94560;
+      border: 2px solid #0f0f13;
+    }
+    .timeline-time {
+      font-size: 11px;
+      color: #e94560;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .timeline-meal {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .timeline-macro {
+      font-size: 12px;
+      color: #6666aa;
+    }
+    .timeline-kcal {
+      display: inline-block;
+      background: #ffffff08;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 12px;
+      color: #aaaacc;
+      margin-left: 8px;
+    }
+    .timeline-total {
+      background: #e9456010;
+      border: 1px solid #e9456030;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 700;
+      color: #e94560;
+      margin-top: 8px;
+    }
+
+    /* TIPPING BLOCKS */
+    .tip-block {
+      background: #1e1e2e;
+      border-left: 3px solid #e94560;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #ccccdd;
+    }
+    .tip-block.blue  { border-color: #3b82f6; }
+    .tip-block.green { border-color: #22c55e; }
+
+    /* PILLS LIST */
+    .pills-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .pill {
+      background: #1e1e2e;
+      border: 1px solid #ffffff10;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: #ccccdd;
+    }
+    .pill.danger {
+      background: #e9456010;
+      border-color: #e9456030;
+      color: #e94560;
+    }
+
+    /* FINAL THESES */
+    .theses { display: grid; gap: 12px; }
+    .thesis {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: #16161f;
+      border: 1px solid #ffffff0d;
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .thesis-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #e94560, #c73652);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .thesis-text { font-size: 15px; color: #ccccdd; line-height: 1.5; }
+    .thesis-text strong { color: #fff; }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ffffff10, transparent);
+      margin: 48px 0;
+    }
+
+    /* PROGRESS RING (body fat visual) */
+    .fat-visual {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .fat-gauge {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+    .fat-gauge svg { transform: rotate(-90deg); }
+    .fat-gauge-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .fat-gauge-label .pct { font-size: 22px; font-weight: 800; color: #fff; }
+    .fat-gauge-label .sub { font-size: 10px; color: #6666aa; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: #44446a;
+      font-size: 12px;
+      border-top: 1px solid #ffffff08;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .container { padding: 40px 16px; }
+      .cards-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Спортивная нутрициология · 2026</div>
+  <h1>Питание для <span>спортсмена 45+</span></h1>
+  <p class="hero-sub">Теннис + Хоккей &nbsp;·&nbsp; 5 тренировок в неделю &nbsp;·&nbsp; Персональный план</p>
+  <div class="stats-row">
+    <div class="stat-chip">
+      <span class="val">91 кг</span>
+      <span class="lbl">Текущий вес</span>
+    </div>
+    <div class="stat-chip">
+      <span class="val">178 см</span>
+      <span class="lbl">Рост</span>
+    </div>
+    <div class="stat-chip">
+      <span class="val">45 лет</span>
+      <span class="lbl">Возраст</span>
+    </div>
+    <div class="stat-chip">
+      <span class="val">BMI 28.7</span>
+      <span class="lbl">Индекс массы</span>
+    </div>
+    <div class="arrow-chip">
+      <span class="arrow">→</span>
+      <span>Цель: 82–85 кг / 15–18% жира</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1. ПРОЦЕНТ ЖИРА -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Оптимальный процент жира</div>
+        <div class="section-subtitle">Целевой диапазон для активного мужчины 45+</div>
+      </div>
+    </div>
+    <div class="fat-visual" style="margin-bottom:24px;">
+      <div class="fat-gauge">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#ffffff0d" stroke-width="10"/>
+          <!-- Current ~25% of 100% range = arc of 25% -->
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#e94560" stroke-width="10"
+            stroke-dasharray="314" stroke-dashoffset="235" stroke-linecap="round"/>
+        </svg>
+        <div class="fat-gauge-label">
+          <span class="pct">~25%</span>
+          <span class="sub">Сейчас</span>
+        </div>
+      </div>
+      <div class="fat-gauge">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#ffffff0d" stroke-width="10"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#22c55e" stroke-width="10"
+            stroke-dasharray="314" stroke-dashoffset="267" stroke-linecap="round"/>
+        </svg>
+        <div class="fat-gauge-label">
+          <span class="pct" style="color:#22c55e">15–18%</span>
+          <span class="sub">Цель</span>
+        </div>
+      </div>
+      <div style="flex:1; min-width:200px;">
+        <p style="color:#aaaacc; font-size:14px; line-height:1.7;">
+          При % жира 15–18% сохраняется <strong style="color:#fff">максимальная взрывная мощь</strong> на льду и корте, минимальная нагрузка на суставы и оптимальный гормональный фон для возраста 45+.
+        </p>
+        <p style="color:#8888aa; font-size:12px; margin-top:10px;">
+          Темп снижения: 0.3–0.5 кг/нед &nbsp;·&nbsp; Горизонт: 3–4 месяца
+        </p>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Категория</th><th>% жира</th><th>Комментарий</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Атлетический</td><td><span class="badge badge-blue">10–15%</span></td><td>Видны мышцы, пиковая работоспособность</td></tr>
+          <tr class="highlight"><td>Оптимальный (цель)</td><td><span class="badge badge-green">15–18%</span></td><td>Здоровье + спорт + энергия — лучший баланс</td></tr>
+          <tr><td>Норма</td><td><span class="badge badge-yellow">20–25%</span></td><td>Снижает скорость и выносливость</td></tr>
+          <tr><td>Избыток</td><td><span class="badge badge-red">&gt;25%</span></td><td>Нагрузка на суставы, снижение VO₂max</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. КАЛОРИИ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Суточная калорийность</div>
+        <div class="section-subtitle">BMR + TDEE + периодизация по типу дня</div>
+      </div>
+    </div>
+    <div class="cards cards-4" style="margin-bottom:24px;">
+      <div class="card">
+        <h3>BMR</h3>
+        <div class="big-num">1802 <span>ккал</span></div>
+        <div class="desc">Базовый обмен в покое</div>
+      </div>
+      <div class="card card-accent">
+        <h3>TDEE</h3>
+        <div class="big-num" style="color:#e94560">3109 <span style="color:#8888aa">ккал</span></div>
+        <div class="desc">С учётом 5 тренировок/нед (×1.725)</div>
+      </div>
+      <div class="card card-green">
+        <h3>Игровой день</h3>
+        <div class="big-num" style="color:#22c55e">3100 <span style="color:#8888aa">ккал</span></div>
+        <div class="desc">Полноценное питание</div>
+      </div>
+      <div class="card card-blue">
+        <h3>День отдыха</h3>
+        <div class="big-num" style="color:#60a5fa">2600 <span style="color:#8888aa">ккал</span></div>
+        <div class="desc">Мягкий дефицит −500 ккал</div>
+      </div>
+    </div>
+    <div class="tip-block">
+      <strong>Ключевой принцип:</strong> дефицит создаётся исключительно в дни отдыха. Урезать калории в дни игр — ошибка, ведущая к потере мощи и риску травм.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. МАКРОНУТРИЕНТЫ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Макронутриенты</div>
+        <div class="section-subtitle">Белок · Углеводы · Жиры</div>
+      </div>
+    </div>
+
+    <!-- БЖУ БАРЫ -->
+    <div class="cards cards-2" style="margin-bottom:32px;">
+      <div class="card">
+        <h3 style="margin-bottom:20px;">Игровой день — 3100 ккал</h3>
+        <div class="macro-bar-wrap">
+          <div class="macro-bar-label">
+            <span class="name">Белок</span>
+            <span class="val">175 г · 700 ккал · 23%</span>
+          </div>
+          <div class="macro-bar-bg"><div class="macro-bar bar-protein" style="width:23%"></div></div>
+        </div>
+        <div class="macro-bar-wrap">
+          <div class="macro-bar-label">
+            <span class="name">Углеводы</span>
+            <span class="val">490 г · 1960 ккал · 63%</span>
+          </div>
+          <div class="macro-bar-bg"><div class="macro-bar bar-carbs" style="width:63%"></div></div>
+        </div>
+        <div class="macro-bar-wrap">
+          <div class="macro-bar-label">
+            <span class="name">Жиры</span>
+            <span class="val">49 г · 441 ккал · 14%</span>
+          </div>
+          <div class="macro-bar-bg"><div class="macro-bar bar-fat" style="width:14%"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:20px;">День отдыха — 2600 ккал</h3>
+        <div class="macro-bar-wrap">
+          <div class="macro-bar-label">
+            <span class="name">Белок</span>
+            <span class="val">175 г · 700 ккал · 27%</span>
+          </div>
+          <div class="macro-bar-bg"><div class="macro-bar bar-protein" style="width:27%"></div></div>
+        </div>
+        <div class="macro-bar-wrap">
+          <div class="macro-bar-label">
+            <span class="name">Углеводы</span>
+            <span class="val">220 г · 880 ккал · 34%</span>
+          </div>
+          <div class="macro-bar-bg"><div class="macro-bar bar-carbs" style="width:34%"></div></div>
+        </div>
+        <div class="macro-bar-wrap">
+          <div class="macro-bar-label">
+            <span class="name">Жиры</span>
+            <span class="val">113 г · 1017 ккал · 39%</span>
+          </div>
+          <div class="macro-bar-bg"><div class="macro-bar bar-fat" style="width:39%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 колонки: БЖУ -->
+    <div class="cards cards-3">
+      <!-- БЕЛОК -->
+      <div class="card">
+        <div class="card-icon">🥩</div>
+        <h3>Белок</h3>
+        <div class="big-num">175 <span>г/день</span></div>
+        <div class="desc">1.8–2.2 г/кг · каждый день одинаково</div>
+        <div style="margin-top:16px;">
+          <table class="data-table" style="font-size:12px;">
+            <tr><td>Куриная грудь</td><td style="text-align:right;color:#fff">31 г/100г</td></tr>
+            <tr><td>Говядина</td><td style="text-align:right;color:#fff">26 г/100г</td></tr>
+            <tr><td>Лосось</td><td style="text-align:right;color:#fff">25 г/100г</td></tr>
+            <tr><td>Творог 5%</td><td style="text-align:right;color:#fff">18 г/100г</td></tr>
+            <tr><td>Яйца</td><td style="text-align:right;color:#fff">13 г/100г</td></tr>
+          </table>
+        </div>
+      </div>
+      <!-- УГЛЕВОДЫ -->
+      <div class="card">
+        <div class="card-icon">🍚</div>
+        <h3>Углеводы</h3>
+        <div class="big-num">490 / <span>220 г</span></div>
+        <div class="desc">Игровой / день отдыха — периодизация</div>
+        <div style="margin-top:16px;">
+          <table class="data-table" style="font-size:12px;">
+            <tr><td>Рис (до игры)</td><td style="text-align:right;"><span class="badge badge-yellow">Средний ГИ</span></td></tr>
+            <tr><td>Гречка</td><td style="text-align:right;"><span class="badge badge-green">Низкий ГИ</span></td></tr>
+            <tr><td>Овсянка</td><td style="text-align:right;"><span class="badge badge-green">Низкий ГИ</span></td></tr>
+            <tr><td>Батат</td><td style="text-align:right;"><span class="badge badge-green">Низкий ГИ</span></td></tr>
+            <tr><td>Банан (до/после)</td><td style="text-align:right;"><span class="badge badge-yellow">Средний ГИ</span></td></tr>
+          </table>
+        </div>
+      </div>
+      <!-- ЖИРЫ -->
+      <div class="card">
+        <div class="card-icon">🥑</div>
+        <h3>Жиры</h3>
+        <div class="big-num">91–113 <span>г/день</span></div>
+        <div class="desc">Растут в дни отдыха для насыщения и гормонов</div>
+        <div style="margin-top:16px;">
+          <table class="data-table" style="font-size:12px;">
+            <tr><td>Авокадо</td><td style="text-align:right;color:#fff">15 г/100г</td></tr>
+            <tr><td>Оливковое масло</td><td style="text-align:right;color:#fff">2 ст.л./день</td></tr>
+            <tr><td>Лосось/скумбрия</td><td style="text-align:right;color:#fff">+ омега-3</td></tr>
+            <tr><td>Грецкие орехи</td><td style="text-align:right;color:#fff">Горсть/день</td></tr>
+            <tr><td>Яйца (желток)</td><td style="text-align:right;color:#fff">Холин</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. ТАЙМИНГ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Тайминг питания вокруг игры</div>
+        <div class="section-subtitle">Что и когда есть для максимальной производительности</div>
+      </div>
+    </div>
+    <div class="cards cards-2">
+      <div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">За 2–3 часа до</div>
+            <div class="timeline-meal">Сложные углеводы + белок</div>
+            <div class="timeline-macro">Рис 180 г + куриная грудь 200 г + овощи · минимум жира</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">За 30–60 минут</div>
+            <div class="timeline-meal">Быстрые углеводы</div>
+            <div class="timeline-macro">Банан, финики, мёд — быстрое топливо перед стартом</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">Во время игры (&gt;60 мин)</div>
+            <div class="timeline-meal">Изотоник или углеводный напиток</div>
+            <div class="timeline-macro">30–60 г углеводов/час · 500–750 мл воды/час</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">Первые 30–45 мин после</div>
+            <div class="timeline-meal">Быстрый белок + углеводы</div>
+            <div class="timeline-macro">Протеин 35 г + рис 150 г + банан · анаболическое окно</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">Перед сном</div>
+            <div class="timeline-meal">Казеиновый белок</div>
+            <div class="timeline-macro">Творог 200 г — синтез белка ночью, антикатаболизм</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ПЛАН ДНЯ -->
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Время</th><th>Приём</th><th>Ккал</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="badge badge-blue">07:00</span></td><td>Овсянка 120 г + 4 яйца + банан</td><td>~580</td></tr>
+            <tr><td><span class="badge badge-blue">10:00</span></td><td>Йогурт греческий 250 г + орехи</td><td>~330</td></tr>
+            <tr><td><span class="badge badge-blue">13:00</span></td><td>Рис 180 г + курица 250 г + овощи</td><td>~700</td></tr>
+            <tr><td><span class="badge badge-yellow">16:00</span></td><td>Банан + протеин-батончик</td><td>~340</td></tr>
+            <tr><td><span class="badge badge-yellow">19:00</span></td><td>Протеин 35 г + рис 150 г + банан</td><td>~540</td></tr>
+            <tr><td><span class="badge badge-blue">20:30</span></td><td>Лосось 200 г + батат 200 г + салат</td><td>~530</td></tr>
+            <tr><td><span class="badge badge-blue">23:00</span></td><td>Творог 200 г</td><td>~200</td></tr>
+            <tr class="total"><td colspan="2">ИТОГО</td><td>~3060</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. ГИДРАТАЦИЯ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Гидратация</div>
+        <div class="section-subtitle">Хоккей — до 2 л/час потерь в экипировке</div>
+      </div>
+    </div>
+    <div class="cards cards-4">
+      <div class="card card-blue">
+        <div class="card-icon">💧</div>
+        <h3>Базовая норма</h3>
+        <div class="big-num" style="color:#60a5fa">3.2 <span>л/день</span></div>
+        <div class="desc">35 мл × 91 кг</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎾</div>
+        <h3>День тренировки</h3>
+        <div class="big-num">+1.5 <span>л</span></div>
+        <div class="desc">Итого ~4.5–5 л</div>
+      </div>
+      <div class="card card-accent">
+        <div class="card-icon">🏒</div>
+        <h3>Хоккей (потери)</h3>
+        <div class="big-num" style="color:#e94560">до 2 <span>л/ч</span></div>
+        <div class="desc">Экипировка удерживает тепло</div>
+      </div>
+      <div class="card card-yellow">
+        <div class="card-icon">⚡</div>
+        <h3>После матча</h3>
+        <div class="big-num" style="color:#fbbf24">×1.5 <span>потерь</span></div>
+        <div class="desc">+ электролиты Na, K, Mg</div>
+      </div>
+    </div>
+    <div class="tip-block blue" style="margin-top:16px;">
+      <strong>Признак нормы:</strong> светло-жёлтая моча в течение всего дня. Тёмная моча = обезвоживание, которое снижает взрывную силу уже при потере 2% веса тела.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. ДОБАВКИ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">Ключевые добавки</div>
+        <div class="section-subtitle">Только с высокой доказательной базой</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Добавка</th><th>Доза</th><th>Эффект</th><th>Доказательность</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td>Креатин моногидрат</td>
+            <td>3–5 г/день</td>
+            <td>Взрывная сила, восстановление</td>
+            <td><span class="badge badge-stars">★★★★★ A</span></td>
+          </tr>
+          <tr>
+            <td>Омега-3</td>
+            <td>2–3 г EPA+DHA</td>
+            <td>Суставы, воспаление</td>
+            <td><span class="badge badge-stars">★★★★★ A</span></td>
+          </tr>
+          <tr>
+            <td>Витамин D3</td>
+            <td>2000–4000 МЕ/день</td>
+            <td>Гормоны, кости, иммунитет</td>
+            <td><span class="badge badge-stars">★★★★★ A</span></td>
+          </tr>
+          <tr>
+            <td>Кофеин</td>
+            <td>273–546 мг до игры</td>
+            <td>Скорость реакции, концентрация</td>
+            <td><span class="badge badge-stars">★★★★★ A</span></td>
+          </tr>
+          <tr>
+            <td>Магний глицинат</td>
+            <td>300–400 мг/день</td>
+            <td>Сон, мышцы, нервная система</td>
+            <td><span class="badge badge-blue">★★★★ B</span></td>
+          </tr>
+          <tr>
+            <td>Коллаген + Витамин C</td>
+            <td>10–15 г + 200 мг</td>
+            <td>Связки, хрящи, суставы</td>
+            <td><span class="badge badge-blue">★★★★ B</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip-block green" style="margin-top:16px;">
+      <strong>Приоритет #1 — Креатин.</strong> Единственная добавка, которая напрямую увеличивает взрывную мощь в хоккее и теннисе. Безопасна, дёшева, работает у всех. 3–5 г каждый день без загрузочной фазы.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. 45+ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">Особенности возраста 45+</div>
+        <div class="section-subtitle">Тестостерон · Суставы · Восстановление</div>
+      </div>
+    </div>
+    <div class="cards cards-3">
+      <div class="card card-yellow">
+        <div class="card-icon">⚡</div>
+        <h3>Тестостерон</h3>
+        <p>Снижается ~1–2%/год после 35. Поддержать помогают: достаточно жиров (&gt;80 г/день), цинк (говядина, тыквенные семечки), витамин D3, качественный сон 8–9 часов.</p>
+      </div>
+      <div class="card card-blue">
+        <div class="card-icon">🦴</div>
+        <h3>Суставы</h3>
+        <p>Теннис + хоккей — высокая ударная нагрузка. Коллаген 10–15 г + витамин C за 30 мин до тренировки. Омега-3 системно снижает воспаление. Куркумин — натуральный НПВП.</p>
+      </div>
+      <div class="card card-green">
+        <div class="card-icon">😴</div>
+        <h3>Восстановление</h3>
+        <p>После 40 восстановление требует на 20–30% больше времени. <strong style="color:#fff">Сон 8–9 часов — главный анаболик</strong>, важнее любой добавки. Углеводная загрузка накануне матча обязательна.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 8. ЗАПРЕЩЁННОЕ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div>
+        <div class="section-title">Чего избегать</div>
+        <div class="section-subtitle">Факторы, которые тормозят прогресс</div>
+      </div>
+    </div>
+    <div class="cards cards-2">
+      <div>
+        <div class="pills-list">
+          <span class="pill danger">Алкоголь</span>
+          <span class="pill danger">Трансжиры</span>
+          <span class="pill danger">Голодные тренировки</span>
+          <span class="pill danger">Пропуск приёмов пищи</span>
+          <span class="pill danger">Сахар в дни отдыха</span>
+          <span class="pill danger">Кофеин после 16:00 (вечерние игры)</span>
+          <span class="pill danger">Дефицит в игровой день</span>
+          <span class="pill danger">Фастфуд накануне матча</span>
+        </div>
+      </div>
+      <div>
+        <div class="tip-block" style="margin-top:0;">
+          <strong>Алкоголь:</strong> подавляет синтез белка на 24–36 ч, повышает кортизол, снижает тестостерон, разрушает фазу глубокого сна.
+        </div>
+        <div class="tip-block" style="margin-top:12px; border-color:#f59e0b">
+          <strong>Голодные тренировки:</strong> организм переходит на катаболизм — сжигает мышцы вместо жира. Скорость падает, риск травм растёт.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- НООТРОПЫ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">N</div>
+      <div>
+        <div class="section-title">Ноотропный стек</div>
+        <div class="section-subtitle">Ноопепт + Альфа-GPC + Ежовик · 5 дней в неделю</div>
+      </div>
+    </div>
+
+    <div class="cards cards-3" style="margin-bottom:24px;">
+      <div class="card" style="border-color:#7c3aed30; background:#7c3aed08;">
+        <div class="card-icon">🍄</div>
+        <h3>Ежовик гребенчатый</h3>
+        <div class="big-num" style="color:#a78bfa">500–1000 <span>мг/день</span></div>
+        <div class="desc" style="margin-top:12px; line-height:1.7;">
+          Lion's Mane — единственный гриб, стимулирующий синтез NGF (фактора роста нервов). Запускает нейрогенез — рост новых нейронных связей.<br><br>
+          <strong style="color:#fff">Эффекты:</strong> долгосрочное улучшение памяти и фокуса, снижение тревожности, нейропротекция. Работает накопительно — эффект через 4–8 недель приёма.
+        </div>
+      </div>
+      <div class="card" style="border-color:#7c3aed30; background:#7c3aed08;">
+        <div class="card-icon">🧠</div>
+        <h3>Ноопепт</h3>
+        <div class="big-num" style="color:#a78bfa">10–30 <span>мг/день</span></div>
+        <div class="desc" style="margin-top:12px; line-height:1.7;">
+          Пептидный ноотроп. Усиливает экспрессию BDNF и NGF — факторов роста нейронов. Повышает скорость обработки информации, реакцию, пространственную память.<br><br>
+          <strong style="color:#fff">Для тенниса и хоккея:</strong> улучшает game IQ, скорость принятия решений под давлением, удержание концентрации в конце матча.
+        </div>
+      </div>
+      <div class="card" style="border-color:#7c3aed30; background:#7c3aed08;">
+        <div class="card-icon">⚡</div>
+        <h3>Альфа-GPC</h3>
+        <div class="big-num" style="color:#a78bfa">300–600 <span>мг/день</span></div>
+        <div class="desc" style="margin-top:12px; line-height:1.7;">
+          Источник холина с высокой биодоступностью (~40%). Повышает синтез ацетилхолина — нейромедиатора памяти, концентрации и мышечного контроля.<br><br>
+          <strong style="color:#fff">Для спорта:</strong> исследования показывают прирост взрывной силы до +14% и улучшение нейромышечной координации. Усиливает действие ноопепта (холинергический субстрат).
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom:20px;">
+      <table class="data-table">
+        <thead>
+          <tr><th>Параметр</th><th>Ежовик</th><th>Ноопепт</th><th>Альфа-GPC</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Доза</td><td>500–1000 мг</td><td>10–30 мг</td><td>300–600 мг</td></tr>
+          <tr><td>Когда принимать</td><td>Утром, с едой</td><td>Утром или до игры</td><td>За 30–60 мин до тренировки</td></tr>
+          <tr><td>Цикл</td><td>5 дней on / 2 off</td><td>5 дней on / 2 off</td><td>5 дней on / 2 off</td></tr>
+          <tr><td>Длительность курса</td><td>3+ месяца (накопит.)</td><td>56 дней → 4 нед перерыв</td><td>Можно длительно</td></tr>
+          <tr><td>Начало действия</td><td>4–8 недель</td><td>1–3 дня</td><td>30–60 минут</td></tr>
+          <tr class="highlight"><td>Синергия стека</td><td colspan="3">Ежовик → долгосрочный нейрогенез (NGF). Ноопепт → острый когнитивный буст (BDNF+NGF). Альфа-GPC → холинергический субстрат. Все три усиливают друг друга.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards cards-3">
+      <div class="card card-yellow">
+        <h3>Важно: холиновая нагрузка</h3>
+        <p style="font-size:13px; color:#aaaacc; line-height:1.6; margin-top:8px;">
+          При совместном приёме следи за симптомами избытка холина: головная боль, усталость, "мозговой туман". Если появились — снизь дозу Альфа-GPC до 150–300 мг или сделай перерыв 2–3 дня.
+        </p>
+      </div>
+      <div class="card card-blue">
+        <h3>Совместимость с кофеином</h3>
+        <p style="font-size:13px; color:#aaaacc; line-height:1.6; margin-top:8px;">
+          Хорошо сочетается. Кофеин + Альфа-GPC + Ноопепт = синергия по фокусу и реакции перед матчем. Не превышай 300 мг кофеина при таком стеке.
+        </p>
+      </div>
+      <div class="card card-green">
+        <h3>Совместимость с креатином</h3>
+        <p style="font-size:13px; color:#aaaacc; line-height:1.6; margin-top:8px;">
+          Отлично совместимы. Креатин работает на мышечном уровне, Альфа-GPC + Ноопепт — на нейронном. Вместе улучшают и физическую мощь, и нейромышечную связь.
+        </p>
+      </div>
+    </div>
+
+    <div class="tip-block" style="margin-top:20px; border-color:#7c3aed;">
+      <strong>Оптимальный утренний стек (игровой день):</strong> Альфа-GPC 400 мг + Ноопепт 20 мг после завтрака → за 60 мин до игры кофеин 200–300 мг. Не принимай Ноопепт позже 15:00 — может нарушить засыпание.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ФАРМАКОЛОГИЧЕСКИЙ ПРОТОКОЛ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background:linear-gradient(135deg,#0891b2,#0e7490)">Rx</div>
+      <div>
+        <div class="section-title">Фармакологический протокол</div>
+        <div class="section-subtitle">Semavic Next + Овитрель · 1 раз в 6 дней · влияние на питание и восстановление</div>
+      </div>
+    </div>
+
+    <div class="cards cards-2" style="margin-bottom:24px;">
+      <div class="card" style="border-color:#0891b230; background:#0891b208;">
+        <div class="card-icon">💉</div>
+        <h3>Semavic Next (Семаглутид)</h3>
+        <div class="big-num" style="color:#22d3ee">0.5 <span>мг / 6 дней</span></div>
+        <div class="desc" style="margin-top:12px; line-height:1.7;">
+          Агонист GLP-1 рецепторов. Замедляет опустошение желудка, снижает аппетит на 30–50%, ускоряет утилизацию жировой ткани.<br><br>
+          <strong style="color:#fff">Механизм:</strong> имитирует инкретиновый гормон → усиливает чувство насыщения, снижает глюкозу натощак, улучшает инсулинорезистентность.
+        </div>
+      </div>
+      <div class="card" style="border-color:#0891b230; background:#0891b208;">
+        <div class="card-icon">⚗️</div>
+        <h3>Овитрель (рХГЧ)</h3>
+        <div class="big-num" style="color:#22d3ee">80 <span>мкг / 6 дней</span></div>
+        <div class="desc" style="margin-top:12px; line-height:1.7;">
+          Рекомбинантный хорионический гонадотропин. Имитирует ЛГ (лютеинизирующий гормон) → стимулирует клетки Лейдига → эндогенный тестостерон.<br><br>
+          <strong style="color:#fff">Цель:</strong> поддержание тестостерона, предотвращение атрофии яичек, сохранение либидо и анаболического фона без подавления оси ГГЯ.
+        </div>
+      </div>
+    </div>
+
+    <!-- КРИТИЧЕСКИ ВАЖНО ПРИ СЕМАГЛУТИДЕ -->
+    <div style="background:#e9456010; border:1px solid #e9456040; border-radius:16px; padding:24px; margin-bottom:24px;">
+      <div style="font-size:13px; text-transform:uppercase; letter-spacing:1px; color:#e94560; margin-bottom:16px; font-weight:700;">⚠ Критически важно при приёме семаглутида</div>
+      <div class="cards cards-2" style="margin:0;">
+        <div>
+          <p style="font-size:14px; color:#ccccdd; line-height:1.8; margin-bottom:12px;">
+            <strong style="color:#fff">Белок под угрозой.</strong> Семаглутид резко снижает аппетит — люди едят на 500–800 ккал меньше, но часто недобирают белок. При дефиците белка на фоне GLP-1 агониста тело теряет мышцы, а не только жир. Соотношение потери жир:мышцы = 70:30 без контроля белка.
+          </p>
+          <p style="font-size:14px; color:#ccccdd; line-height:1.8;">
+            <strong style="color:#fff">Правило:</strong> даже если не хочется есть — <strong style="color:#e94560">175 г белка в день обязательны</strong>. Использовать протеиновые коктейли как страховку.
+          </p>
+        </div>
+        <div>
+          <p style="font-size:14px; color:#ccccdd; line-height:1.8; margin-bottom:12px;">
+            <strong style="color:#fff">День инъекции.</strong> У многих в первые 12–24 ч после укола тошнота. В этот день: лёгкие, легкоусвояемые продукты (рис, бананы, бульон, яйца). Избегай жирной пищи и больших порций.
+          </p>
+          <p style="font-size:14px; color:#ccccdd; line-height:1.8;">
+            <strong style="color:#fff">Замедленный желудок.</strong> Еда за 2–3 ч до игры может "стоять" дольше обычного → ешь за 3–4 ч и выбирай легко усваиваемые источники.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom:24px;">
+      <table class="data-table">
+        <thead>
+          <tr><th>Аспект</th><th>Semavic Next (GLP-1)</th><th>Овитрель (рХГЧ)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Влияние на аппетит</td><td>Снижает на 30–50%</td><td>Нейтральное</td></tr>
+          <tr><td>Влияние на мышцы</td><td>⚠ Риск потери без белка</td><td>Защищает (через тестостерон)</td></tr>
+          <tr><td>Влияние на жир</td><td>Ускоряет снижение</td><td>Косвенно — через тестостерон</td></tr>
+          <tr><td>День инъекции и спорт</td><td>Лучше не в день тяжёлой игры</td><td>Нейтрально</td></tr>
+          <tr><td>Совместимость с креатином</td><td>Совместим</td><td>Совместим</td></tr>
+          <tr><td>Совместимость с ноотропами</td><td>Совместим</td><td>Совместим</td></tr>
+          <tr class="highlight"><td>Синергия между собой</td><td colspan="2">Семаглутид снижает жировую массу → Овитрель сохраняет тестостерон и мышцы → результат: сухая масса растёт или сохраняется, жир уходит.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards cards-3">
+      <div class="card card-blue">
+        <h3>Корректировка калорий</h3>
+        <p style="font-size:13px; color:#aaaacc; line-height:1.6; margin-top:8px;">
+          На семаглутиде дефицит создаётся автоматически за счёт снижения аппетита. Не нужно искусственно урезать калории. Фокус — на качестве еды и белке, а не подсчёте ккал.
+        </p>
+      </div>
+      <div class="card card-green">
+        <h3>Гидратация важнее обычного</h3>
+        <p style="font-size:13px; color:#aaaacc; line-height:1.6; margin-top:8px;">
+          GLP-1 агонисты увеличивают риск обезвоживания. При снижении аппетита люди меньше пьют. Минимум 3.5–4 л/день, особенно в дни игр.
+        </p>
+      </div>
+      <div class="card card-yellow">
+        <h3>Электролиты обязательны</h3>
+        <p style="font-size:13px; color:#aaaacc; line-height:1.6; margin-top:8px;">
+          Быстрое снижение веса на GLP-1 → потеря электролитов. Добавь натрий, калий, магний ежедневно. Особенно критично в дни хоккея и тенниса.
+        </p>
+      </div>
+    </div>
+
+    <div class="tip-block blue" style="margin-top:20px;">
+      <strong>Оптимальный график инъекций:</strong> делай укол Semavic Next в день отдыха (не перед матчем), утром. Овитрель — независимо от нагрузки. Разноси два препарата: не в один день и не в одно место.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ФИНАЛЬНЫЕ ТЕЗИСЫ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">★</div>
+      <div>
+        <div class="section-title">Итоговые тезисы</div>
+        <div class="section-subtitle">7 принципов, которые определяют результат</div>
+      </div>
+    </div>
+    <div class="theses">
+      <div class="thesis">
+        <div class="thesis-num">1</div>
+        <div class="thesis-text"><strong>Белок — стабильный.</strong> 175 г каждый день, независимо от типа дня. Это фундамент сохранения мышц при снижении веса.</div>
+      </div>
+      <div class="thesis">
+        <div class="thesis-num">2</div>
+        <div class="thesis-text"><strong>Углеводы — периодизируй.</strong> Много в игровой день (490 г), мало в день отдыха (220 г). Так работает метаболическая гибкость.</div>
+      </div>
+      <div class="thesis">
+        <div class="thesis-num">3</div>
+        <div class="thesis-text"><strong>Жиры растут, когда падают углеводы.</strong> В дни отдыха жиры — источник насыщения, энергии и поддержки тестостерона.</div>
+      </div>
+      <div class="thesis">
+        <div class="thesis-num">4</div>
+        <div class="thesis-text"><strong>Дефицит — только в дни отдыха.</strong> Никогда не урезай калории накануне и в день игры. Это прямой путь к плохой игре и травмам.</div>
+      </div>
+      <div class="thesis">
+        <div class="thesis-num">5</div>
+        <div class="thesis-text"><strong>Тайминг имеет значение.</strong> Еда до, во время и после матча — часть тренировки. Пропустил закрытие окна = потерял восстановление.</div>
+      </div>
+      <div class="thesis">
+        <div class="thesis-num">6</div>
+        <div class="thesis-text"><strong>Сон важнее добавок.</strong> 8–9 часов — главный анаболик и восстановительный агент в 45+. Без сна добавки работают на 30% хуже.</div>
+      </div>
+      <div class="thesis">
+        <div class="thesis-num">7</div>
+        <div class="thesis-text"><strong>Цель — 82–85 кг за 3–4 месяца.</strong> Без спешки, без голода, с полной спортивной производительностью на льду и корте.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Составлено: 2026-06-11 &nbsp;·&nbsp; Параметры: 91 кг / 178 см / 45 лет &nbsp;·&nbsp; Теннис + Хоккей · 5×/нед
+</footer>
+
+</body>
+</html>
