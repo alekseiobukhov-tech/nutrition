@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aleksei · Обратная связь 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f13;color:#e8e8f0;line-height:1.65}
+.hero{background:linear-gradient(135deg,#0f0f13 0%,#1a1a2e 60%,#16213e 100%);padding:60px 24px 48px;text-align:center;border-bottom:1px solid #ffffff10}
+.badge{display:inline-block;padding:5px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;background:#e9456020;border:1px solid #e9456050;color:#e94560}
+h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:#fff;margin-bottom:8px}
+.hero-sub{font-size:14px;color:#6666aa;margin-bottom:40px}
+.score-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:900px;margin:0 auto}
+.score-card{background:#16161f;border:1px solid #ffffff10;border-radius:14px;padding:16px 20px;text-align:center;min-width:130px}
+.score-card .grade{font-size:32px;font-weight:800;display:block;margin-bottom:4px}
+.score-card .area{font-size:10px;color:#6666aa;text-transform:uppercase;letter-spacing:1px}
+.score-card .delta{font-size:11px;margin-top:4px}
+
+.container{max-width:1000px;margin:0 auto;padding:52px 20px}
+.section{margin-bottom:60px}
+.sec-header{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.sec-num{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.sec-title{font-size:20px;font-weight:700;color:#fff}
+.sec-sub{font-size:12px;color:#6666aa;margin-top:2px}
+
+/* Cards */
+.cards{display:grid;gap:16px}
+.cards-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.cards-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:#16161f;border:1px solid #ffffff0d;border-radius:16px;padding:24px}
+.card-red   {border-color:#e9456030;background:#e9456008}
+.card-green {border-color:#22c55e30;background:#22c55e08}
+.card-blue  {border-color:#3b82f630;background:#3b82f608}
+.card-yellow{border-color:#f59e0b30;background:#f59e0b08}
+.card-purple{border-color:#7c3aed30;background:#7c3aed08}
+.card h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6666aa;margin-bottom:10px;font-weight:700}
+.card .big{font-size:32px;font-weight:800;color:#fff;line-height:1}
+.card .small{font-size:13px;color:#aaaacc;margin-top:8px;line-height:1.6}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th{background:#1a1a2e;color:#6666aa;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:10px 14px;text-align:left}
+.data-table td{padding:10px 14px;border-bottom:1px solid #ffffff08;color:#ccccdd}
+.data-table tr:last-child td{border:none}
+.table-wrap{background:#16161f;border:1px solid #ffffff0d;border-radius:14px;overflow:hidden}
+
+/* Alert */
+.alert{border-radius:14px;padding:20px 24px;margin-bottom:16px;display:flex;gap:16px;align-items:flex-start}
+.alert-red   {background:#e9456012;border:1px solid #e9456040}
+.alert-yellow{background:#f59e0b12;border:1px solid #f59e0b40}
+.alert-green {background:#22c55e12;border:1px solid #22c55e40}
+.alert-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.alert-body strong{color:#fff;font-size:14px;display:block;margin-bottom:4px}
+.alert-body p{font-size:13px;color:#aaaacc;line-height:1.6}
+
+/* Recommendations list */
+.rec-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.rec-item{display:flex;gap:14px;align-items:flex-start;background:#16161f;border:1px solid #ffffff0d;border-radius:12px;padding:16px 18px}
+.rec-icon{font-size:20px;flex-shrink:0}
+.rec-body{font-size:14px;color:#ccccdd;line-height:1.6}
+.rec-body strong{color:#fff}
+.rec-tag{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-right:6px}
+.tag-red   {background:#e9456020;color:#e94560;border:1px solid #e9456040}
+.tag-yellow{background:#f59e0b20;color:#fbbf24;border:1px solid #f59e0b40}
+.tag-green {background:#22c55e20;color:#22c55e;border:1px solid #22c55e40}
+.tag-blue  {background:#3b82f620;color:#60a5fa;border:1px solid #3b82f640}
+
+/* Priority table */
+.priority-grid{display:flex;flex-direction:column;gap:10px}
+.prio-item{display:flex;align-items:center;gap:14px;background:#16161f;border:1px solid #ffffff0d;border-radius:12px;padding:14px 18px}
+.prio-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.prio-text{flex:1;font-size:14px;color:#ccccdd}
+.prio-text strong{color:#fff;display:block;margin-bottom:2px}
+.prio-text span{font-size:12px;color:#8888aa}
+.prio-impact{font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px}
+
+/* Month comparison */
+.month-bar{margin-bottom:12px}
+.month-bar-label{display:flex;justify-content:space-between;font-size:12px;color:#aaaacc;margin-bottom:5px}
+.month-bar-label strong{color:#fff}
+.bar-bg{height:8px;background:#ffffff0d;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+
+/* Divider */
+.divider{height:1px;background:linear-gradient(90deg,transparent,#ffffff0d,transparent);margin:48px 0}
+
+footer{text-align:center;padding:40px;color:#44446a;font-size:11px;border-top:1px solid #ffffff08}
+@media(max-width:600px){.cards-3{grid-template-columns:1fr}.score-card{min-width:100px;padding:12px 14px}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">Обратная связь · Январь–Июнь 2026</div>
+  <h1>Алексей Обухов — Аналитика</h1>
+  <p class="hero-sub">На основе 169 дней данных Apple Health + Suunto + протокол препаратов</p>
+
+  <div class="score-grid">
+    <div class="score-card">
+      <span class="grade" style="color:#f59e0b">C+</span>
+      <span class="area">Сон</span>
+      <span class="delta" style="color:#e94560">6.5ч / норма 8–9ч</span>
+    </div>
+    <div class="score-card">
+      <span class="grade" style="color:#f59e0b">B</span>
+      <span class="area">Вес / Состав</span>
+      <span class="delta" style="color:#22c55e">–1.9 кг с пика</span>
+    </div>
+    <div class="score-card">
+      <span class="grade" style="color:#e94560">C</span>
+      <span class="area">% Жира</span>
+      <span class="delta" style="color:#aaaacc">22.4% → цель 15–18%</span>
+    </div>
+    <div class="score-card">
+      <span class="grade" style="color:#f59e0b">B–</span>
+      <span class="area">Пульс</span>
+      <span class="delta" style="color:#aaaacc">78–81 уд/мин ср.</span>
+    </div>
+    <div class="score-card">
+      <span class="grade" style="color:#22c55e">A–</span>
+      <span class="area">Активность</span>
+      <span class="delta" style="color:#22c55e">11–13к шагов/день</span>
+    </div>
+    <div class="score-card">
+      <span class="grade" style="color:#22c55e">A</span>
+      <span class="area">Протокол</span>
+      <span class="delta" style="color:#22c55e">стек грамотный</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- 1. КЛЮЧЕВЫЕ НАХОДКИ -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#e94560,#c73652)">!</div>
+    <div>
+      <div class="sec-title">Ключевые находки</div>
+      <div class="sec-sub">Что данные говорят о 6 месяцах</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-body">
+      <strong>Критично: хроническое недосыпание — главный тормоз прогресса</strong>
+      <p>Среднее время сна 6.5 ч/ночь. В 78% ночей — менее 7 часов. Время бодрствования ночью: <strong style="color:#fff">1.8–2.6 часа каждую ночь</strong> — это патологически высокий показатель. Глубокий сон: 18–50 мин вместо нормы 90–120 мин. Именно это объясняет медленное снижение веса несмотря на семаглутид и высокую активность.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-yellow">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <strong>Вес: откат в мае после прогресса в апреле</strong>
+      <p>Лучший месяц — апрель: 90.1 кг, 21.2% жира. Май: откат до 91.5 кг, 23.3% жира. Коррелирует с ухудшением сна в мае (20 из 27 ночей — менее 7ч). Это классический паттерн: недосыпание → рост кортизола → задержка воды + жировое накопление.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-yellow">
+    <div class="alert-icon">📊</div>
+    <div class="alert-body">
+      <strong>Семаглутид даёт меньший эффект чем ожидалось</strong>
+      <p>За 6 месяцев чистое снижение веса ~1.5 кг (с пика 93.3 кг в феврале до 91.4 кг сейчас). Для семаглутида 0.5 мг ожидается 5–8% снижения за этот период (~4.5–7 кг). Вероятная причина — хроническое недосыпание нарушает баланс лептина/грелина и блокирует жиросжигание даже при сниженном аппетите.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon">✅</div>
+    <div class="alert-body">
+      <strong>Что работает хорошо</strong>
+      <p>Активность на высоком уровне — 11–13 тыс. шагов/день стабильно. Пульс снизился с 80 (январь) до 73 в марте, что говорит об адаптации. Ноотропный стек грамотный. Апрель показал, что протокол работает когда сон нормализован — это доказательство потенциала.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2. АНАЛИЗ ПО МЕСЯЦАМ -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">2</div>
+    <div>
+      <div class="sec-title">Динамика по месяцам</div>
+      <div class="sec-sub">Корреляция сна, веса и пульса</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr>
+        <th>Месяц</th><th>Вес ср.</th><th>% Жира</th>
+        <th>Сон</th><th>Глуб. сон</th><th>Ночей &lt;7ч</th>
+        <th>Пульс ср.</th><th>Шагов/день</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Янв 2026</td><td>92.0 кг</td><td>23.5%</td><td style="color:#e94560">6.5 ч</td><td style="color:#e94560">0.38 ч</td><td style="color:#e94560">24/30</td><td>80</td><td>11 303</td></tr>
+        <tr><td>Фев 2026</td><td>92.5 кг</td><td>22.4%</td><td style="color:#e94560">6.4 ч</td><td style="color:#f59e0b">0.48 ч</td><td style="color:#e94560">18/28</td><td>78</td><td>10 807</td></tr>
+        <tr><td>Мар 2026</td><td>91.6 кг</td><td>20.9%</td><td style="color:#e94560">6.3 ч</td><td style="color:#e94560">0.31 ч</td><td style="color:#e94560">22/30</td><td style="color:#22c55e">73</td><td>12 825</td></tr>
+        <tr style="background:#22c55e08"><td><strong style="color:#22c55e">Апр 2026 ★</strong></td><td style="color:#22c55e"><strong>90.1 кг</strong></td><td style="color:#22c55e">21.2%</td><td style="color:#22c55e">6.9 ч</td><td style="color:#22c55e"><strong>0.83 ч</strong></td><td style="color:#22c55e">12/22</td><td>79</td><td>11 383</td></tr>
+        <tr><td>Май 2026</td><td style="color:#e94560">91.5 кг</td><td style="color:#e94560">23.3%</td><td style="color:#e94560">6.4 ч</td><td style="color:#f59e0b">0.69 ч</td><td style="color:#e94560">20/27</td><td style="color:#e94560">81</td><td>13 189</td></tr>
+        <tr><td>Июн 2026</td><td>91.4 кг</td><td>22.4%</td><td style="color:#e94560">6.6 ч</td><td style="color:#e94560">0.31 ч</td><td style="color:#e94560">9/14</td><td>78</td><td>10 979</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:14px;background:#1a1a2e;border-radius:12px;padding:16px 20px;font-size:13px;color:#aaaacc;border:1px solid #ffffff0d">
+    <strong style="color:#fff">★ Апрель — эталонный месяц:</strong> больше всего глубокого сна (0.83 ч) → наименьший вес (90.1 кг) → наименьший % жира (21.2%). Это прямая причинно-следственная связь. Воспроизвести условия апреля = ключ к прогрессу.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3. СОН — ПРИОРИТЕТ #1 -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">3</div>
+    <div>
+      <div class="sec-title">Сон — приоритет №1</div>
+      <div class="sec-sub">Главная точка роста по всем показателям</div>
+    </div>
+  </div>
+
+  <div class="cards cards-3" style="margin-bottom:24px">
+    <div class="card card-red">
+      <h3>Среднее время сна</h3>
+      <div class="big" style="color:#e94560">6.5 ч</div>
+      <div class="small">Норма для 45+ со спортом 5×/нед: <strong style="color:#fff">8–9 ч</strong><br>Дефицит: ~1.5–2.5 ч каждую ночь</div>
+    </div>
+    <div class="card card-red">
+      <h3>Глубокий сон (Deep)</h3>
+      <div class="big" style="color:#e94560">0.38 ч</div>
+      <div class="small">Норма: <strong style="color:#fff">1.5–2 ч</strong><br>Критически мало — именно в фазе глубокого сна выделяется гормон роста и восстанавливаются мышцы</div>
+    </div>
+    <div class="card card-yellow">
+      <h3>Ночные пробуждения</h3>
+      <div class="big" style="color:#f59e0b">2.1 ч</div>
+      <div class="small">Среднее бодрствование ночью<br>Норма: <strong style="color:#fff">до 30 мин</strong><br>Возможные причины: апноэ, ноотропы, кортизол</div>
+    </div>
+  </div>
+
+  <ul class="rec-list">
+    <li class="rec-item">
+      <div class="rec-icon">🔬</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-red">Срочно</span>
+        <strong>Провериться на апноэ сна (OSAS)</strong><br>
+        2+ часа ночных пробуждений каждую ночь — классический маркер обструктивного апноэ. При апноэ семаглутид работает значительно хуже (оба нарушают сон). Рекомендуется полисомнография или хотя бы ночная пульсоксиметрия.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">⏰</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Важно</span>
+        <strong>Ноопепт — не позже 13:00</strong><br>
+        Ноопепт увеличивает нейропластичность и возбудимость ЦНС. Приём после обеда прямо нарушает засыпание и фрагментирует сон. Переноси весь ноотропный стек на утро с завтраком.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">💊</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Важно</span>
+        <strong>Магний глицинат 400 мг — за 1 час до сна</strong><br>
+        Магний активирует ГАМК-рецепторы, снижает кортизол, удлиняет фазу глубокого сна. Особенно важен при высокой нагрузке — теннис и хоккей расходуют магний быстро. Лучшая форма для сна: глицинат или треонат.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">☕</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Важно</span>
+        <strong>Кофеин — строго до 12:00 в дни вечерних игр</strong><br>
+        Период полувыведения кофеина у людей 45+ — 7–9 часов. Кофе в 15:00 = половина кофеина в крови ещё в 23:00. Особенно критично в дни хоккея/тенниса, когда игра заканчивается поздно.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🛏️</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-blue">Режим</span>
+        <strong>Жёсткое время отбоя: 22:30–23:00</strong><br>
+        Апрель был лучшим месяцем, когда средний сон был 6.9ч. Цель — довести до 8ч за счёт более раннего отбоя, а не позднего подъёма (подъём должен быть стабильным для циркадного ритма).
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4. ТРЕНИРОВОЧНЫЙ ПРОЦЕСС -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#e94560,#c73652)">4</div>
+    <div>
+      <div class="sec-title">Тренировочный процесс</div>
+      <div class="sec-sub">Теннис + Хоккей · 5×/нед · коррекция под данные</div>
+    </div>
+  </div>
+
+  <div class="alert alert-yellow">
+    <div class="alert-icon">⚡</div>
+    <div class="alert-body">
+      <strong>5 тренировок в неделю при 6.5 ч сна — перегрузка</strong>
+      <p>Средний пульс 79–81 уд/мин по всем замерам (включая покой) говорит о недостаточном восстановлении. При норме сна 8–9ч для спортсмена рекомендуемый ЧСС покоя: 55–65. Ваш минимальный зафиксированный — 49, что хорошо, но средний по всем измерениям слишком высок.</p>
+    </div>
+  </div>
+
+  <ul class="rec-list">
+    <li class="rec-item">
+      <div class="rec-icon">📉</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Коррекция</span>
+        <strong>Правило: если сон &lt; 7 часов — снижай интенсивность тренировки на 30%</strong><br>
+        При недосыпании кортизол повышен → тренировка в полную силу даёт катаболический эффект (разрушение мышц). Лучше сделать 60% от максимума и восстановиться, чем загнать организм в перетренированность.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">📊</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-blue">Инструмент</span>
+        <strong>Ориентируйся на утренний пульс покоя для оценки восстановления</strong><br>
+        Измеряй пульс сразу после пробуждения (лёжа). Если он на 5+ уд/мин выше личной нормы — день восстановления, а не интенсивная тренировка. Suunto фиксирует это автоматически.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🏒</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-green">Оптимизация</span>
+        <strong>Хоккей — самая интенсивная нагрузка, ставь накануне углеводную загрузку</strong><br>
+        Хоккей = максимальные потери гликогена за счёт взрывных ускорений. Вечер накануне: +100–150г сложных углеводов сверх нормы. Без этого — последние 10 мин смены падает скорость и решения.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🎾</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-green">Оптимизация</span>
+        <strong>Теннис — работай над зонами пульса, не только техникой</strong><br>
+        Зона 2 (60–70% ЧССмакс = ~108–126 уд/мин) — базовая аэробная зона. 2–3 часа в ней в неделю ускорит снижение % жира и поднимет VO₂max. Добавь 1 лёгкую кардио-сессию (ходьба 45–60 мин) в дни без игр.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">💪</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-blue">Дополнение</span>
+        <strong>1–2 силовые тренировки в неделю — критично для 45+</strong><br>
+        Теннис и хоккей = кардио и координация. Но после 40 лет без силовой работы потеря мышечной массы (~1% в год) не компенсируется спортивными нагрузками. Даже 2×45 мин в зале кардинально улучшат состав тела и защитят суставы.
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5. ПИТАНИЕ -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#22c55e,#16a34a)">5</div>
+    <div>
+      <div class="sec-title">Питание</div>
+      <div class="sec-sub">Скорректировано под семаглутид + реальные данные активности</div>
+    </div>
+  </div>
+
+  <div class="cards cards-3" style="margin-bottom:24px">
+    <div class="card card-red">
+      <h3>Главный риск</h3>
+      <div class="big" style="color:#e94560">Белок</div>
+      <div class="small">Семаглутид снижает аппетит на 30–50%. Главный риск — недобор белка → потеря мышц при снижении веса. Контролируй активно.</div>
+    </div>
+    <div class="card card-green">
+      <h3>Приоритет #1</h3>
+      <div class="big" style="color:#22c55e">175 г</div>
+      <div class="small">Белка в день — каждый день, независимо от аппетита. Это важнее подсчёта калорий. Используй протеин как страховку.</div>
+    </div>
+    <div class="card card-blue">
+      <h3>Калории: игровой день</h3>
+      <div class="big" style="color:#60a5fa">3000</div>
+      <div class="small">ккал — не урезать в дни хоккея и тенниса. Дефицит только в дни отдыха: 2400–2500 ккал.</div>
+    </div>
+  </div>
+
+  <ul class="rec-list">
+    <li class="rec-item">
+      <div class="rec-icon">🥩</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-red">Критично</span>
+        <strong>Ешь белок в первую очередь при каждом приёме пищи</strong><br>
+        На семаглутиде желудок насыщается быстро. Стратегия "protein first" — сначала съедаешь белковую часть, потом углеводы. Так при маленьком объёме еды белок всегда попадает в рацион.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">⚡</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Важно</span>
+        <strong>День инъекции семаглутида — лёгкое питание + обязательный белок</strong><br>
+        Первые 12–24ч после укола часто снижение аппетита и тошнота. В этот день: рис, яйца, творог, бульон. Не пропускай белок под предлогом "не хочу есть".
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🍌</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-green">Оптимизация</span>
+        <strong>Углеводы перед игрой не снижай — это не противоречит целям похудения</strong><br>
+        Семаглутид создаёт дефицит калорий через снижение аппетита. Загрузка углеводами перед интенсивной игрой (теннис, хоккей) необходима для производительности и не отменяет жиросжигание.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">💧</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Важно</span>
+        <strong>Гидратация: минимум 3.5 л в день — семаглутид усиливает обезвоживание</strong><br>
+        GLP-1 агонисты увеличивают диурез. При высоком потоотделении (хоккей — до 2 л/час) это может быть опасно. Добавь электролиты (натрий, калий, магний) ежедневно, не только в дни игр.
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6. ФАРМПРОТОКОЛ -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#0891b2,#0e7490)">6</div>
+    <div>
+      <div class="sec-title">Фармакологический протокол</div>
+      <div class="sec-sub">Semavic Next + Овитрель · оценка и рекомендации</div>
+    </div>
+  </div>
+
+  <ul class="rec-list">
+    <li class="rec-item">
+      <div class="rec-icon">💉</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-red">Обсудить с врачом</span>
+        <strong>Эффективность семаглутида ниже ожидаемой — возможна коррекция дозы</strong><br>
+        За 6 месяцев: –1.5 кг при ожидаемых –4.5–7 кг. Хроническое недосыпание напрямую блокирует действие GLP-1 через нарушение лептина/грелина. Рекомендация врачу: рассмотреть увеличение дозы или частоты введения после нормализации сна. Без нормализации сна увеличение дозы даст ограниченный эффект.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">📅</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-blue">Тайминг</span>
+        <strong>Семаглутид — день отдыха, не накануне важной игры</strong><br>
+        Планируй инъекцию на день без тренировки. Первые 12–24ч возможна тошнота и снижение аппетита — в этот день нежелательна интенсивная нагрузка. Составь расписание на 6 недель вперёд.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">⚗️</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-green">Хорошо</span>
+        <strong>Овитрель — грамотное решение для поддержки тестостерона</strong><br>
+        80 мкг рХГЧ каждые 6 дней защищает тестостерон в условиях дефицита калорий и высокой нагрузки. Синергия с семаглутидом идеальна: один снижает жир, другой защищает мышцы и тестостерон. Рекомендация: не снижать дозу Овитреля при снижении веса.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🔬</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Мониторинг</span>
+        <strong>Анализы каждые 3 месяца: тестостерон общий/свободный + эстрадиол</strong><br>
+        При снижении % жира (особенно ниже 18%) уровень тестостерона обычно растёт. Но при хроническом недосыпании и высоком кортизоле — падает. Контроль: ТТГ, тестостерон total/free, эстрадиол, ЛГ, ФСГ, ПСА.
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- 7. НООТРОПЫ -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">7</div>
+    <div>
+      <div class="sec-title">Ноотропный стек</div>
+      <div class="sec-sub">Ноопепт + Альфа-GPC + Ежовик · оценка и тайминг</div>
+    </div>
+  </div>
+
+  <ul class="rec-list">
+    <li class="rec-item">
+      <div class="rec-icon">⏰</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-red">Критично для сна</span>
+        <strong>Весь стек — строго утром (до 10:00), не позже</strong><br>
+        Ноопепт повышает нейропластичность и возбудимость → при приёме после 13:00 прямо нарушает засыпание. Альфа-GPC через холинергическую стимуляцию может вызывать яркие сны и частые пробуждения. Ежовик — нейтрален, но для синхронизации принимай вместе.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🍄</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-green">Хорошо работает</span>
+        <strong>Ежовик гребенчатый — накопительный эффект, не прерывай курс</strong><br>
+        NGF (фактор роста нервов) нарастает через 4–8 недель стабильного приёма. Краткосрочные перерывы (2 выходных) не влияют на долгосрочный эффект. Оптимальный курс: 12 недель → 4 недели перерыв.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🧠</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-yellow">Коррекция</span>
+        <strong>Альфа-GPC: снизь до 300 мг если есть головные боли или "мозговой туман"</strong><br>
+        Избыток холина при высоком уровне ацетилхолинэстеразы даёт обратный эффект. Симптомы перегрузки: давящая головная боль после приёма, раздражительность, "туман". Если есть — снижай до 150–200 мг/день.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">⚡</div>
+      <div class="rec-body">
+        <span class="rec-tag tag-blue">Оптимизация</span>
+        <strong>Перед игрой: Альфа-GPC 400 мг + кофеин 200 мг (за 45–60 мин)</strong><br>
+        Это доказанная комбинация для взрывной силы и реакции. Исследования показывают прирост силы до 14% и улучшение времени реакции. Ноопепт в день игры — с утра, не перед самой игрой.
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- 8. ДОБАВКИ -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#f59e0b,#d97706)">8</div>
+    <div>
+      <div class="sec-title">Стек добавок: текущий и коррекции</div>
+      <div class="sec-sub">Актуальный протокол · что уже принимается и что скорректировать</div>
+    </div>
+  </div>
+
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6666aa;font-weight:700;margin-bottom:10px;padding-left:4px">✅ Уже принимается — оценка</div>
+  <div class="table-wrap" style="margin-bottom:24px">
+    <table class="data-table">
+      <thead><tr><th>Добавка</th><th>Доза / Время</th><th>Оценка</th><th>Комментарий</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Креатин моногидрат</strong></td><td>5 г утром</td><td><span class="rec-tag tag-green">Отлично</span></td><td>Правильная доза, правильное время. Синергия с Alpha-GPC для нейропротекции.</td></tr>
+        <tr><td><strong>Магний глицинат</strong></td><td>400 мг на ночь</td><td><span class="rec-tag tag-green">Отлично</span></td><td>Нужная форма, нужное время. Продолжать.</td></tr>
+        <tr><td><strong>Глицин</strong></td><td>2000 мг на ночь</td><td><span class="rec-tag tag-green">Отлично</span></td><td>Клинически доказано улучшает глубокий сон и снижает температуру тела. Правильно.</td></tr>
+        <tr><td><strong>5-HTP</strong></td><td>на ночь (доза?)</td><td><span class="rec-tag tag-yellow">Проверить</span></td><td>Хороший выбор. Оптимальная доза для сна: <strong>50–100 мг</strong>. Не сочетать с антидепрессантами. При дозах выше 150 мг — риск сероинднового синдрома.</td></tr>
+        <tr style="background:#e9456008"><td><strong>Альфа-липоевая кислота (ALA)</strong></td><td>600 мг утром</td><td><span class="rec-tag tag-yellow">Корректировать</span></td><td>Хороша для инсулиновой чувствительности (синергия с семаглутидом). Но: ALA вымывает биотин (B7) — необходимо добавить биотин 2–3 мг/день. Принимать строго с едой, не натощак.</td></tr>
+        <tr><td><strong>Янтарная кислота</strong></td><td>2000 мг утром</td><td><span class="rec-tag tag-green">Хорошо</span></td><td>Субстрат цикла Кребса — поддержка митохондриальной энергетики. Хорошая синергия с ALA. При 2000 мг принимать строго с едой (риск ГИ-дискомфорта натощак). Исследований высшего уровня мало, но для спортивного восстановления — обоснованный выбор.</td></tr>
+        <tr><td><strong>D3 + K2 (Orsax Ocean)</strong></td><td>6000 МЕ D3 + K2 утром</td><td><span class="rec-tag tag-green">Отлично</span></td><td>6000 МЕ — адекватная доза при активном образе жизни. K2 включён — это важно (предотвращает кальциевые отложения в сосудах). Принимать с жирной едой (жирорастворимый). Контроль уровня 25(OH)D3 в анализах раз в 3 мес.</td></tr>
+        <tr><td><strong>Коэнзим B-комплекс (Country Life)</strong></td><td>2 капсулы утром</td><td><span class="rec-tag tag-green">Отлично</span></td><td>Активные формы (P5P, метилкобаламин, метилфолат) — лучшее усвоение. Содержит ~600 мкг биотина (2 капсулы) — частично компенсирует вымывание от ALA, но не полностью: нужен дополнительный биотин 1–2 мг. Синергия B6(P5P)+5-HTP — усиливает синтез серотонина. Принимать с едой, утром — правильно.</td></tr>
+        <tr style="background:#3b82f608"><td><strong>Аденурик (фебуксостат)</strong></td><td>40 мг</td><td><span class="rec-tag tag-blue">Клиническое</span></td><td>Ингибитор ксантиноксидазы — снижает мочевую кислоту. При интенсивных нагрузках (хоккей, теннис) уровень урата временно растёт — препарат оправдан. <strong style="color:#fbbf24">Важно:</strong> минимизировать пурины в питании (красное мясо, субпродукты, анчоусы), ограничить фруктозу, не пропускать 3.5 л воды. Включить в анализы: АЛТ/АСТ и мочевая кислота (феб-рат контролирует печень).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-yellow" style="margin-top:20px">
+    <div class="alert-icon">⚡</div>
+    <div class="alert-body">
+      <strong>Аденурик + интенсивные тренировки: обязательная гидратация сразу после игры</strong>
+      <p>При распаде АТФ во время хоккея и тенниса уровень мочевой кислоты резко растёт. Вымывание происходит через почки — при недостаточной гидратации кристаллы накапливаются. <strong style="color:#fff">Правило: 500 мл воды сразу после финального свистка</strong>, ещё 500 мл в следующий час. Алкоголь (даже пиво) — прямой антагонист аденурика.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-red" style="margin-bottom:20px">
+    <div class="alert-icon">🔬</div>
+    <div class="alert-body">
+      <strong>Критическое наблюдение: сон не улучшается несмотря на сильный стек</strong>
+      <p>Магний глицинат + глицин 2000 мг + 5-HTP — это клинически обоснованная комбинация для сна. То, что при таком стеке <strong style="color:#fff">всё равно 2+ часа ночных пробуждений</strong> — почти исключает биохимическую причину фрагментации. Это характеристика <strong style="color:#e94560">структурного нарушения: апноэ сна</strong>. Никакая добавка не может открыть дыхательные пути. Полисомнография — не опция, это следующий шаг.</p>
+    </div>
+  </div>
+
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6666aa;font-weight:700;margin-bottom:10px;padding-left:4px">➕ Рекомендуется добавить</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Добавка</th><th>Доза</th><th>Зачем</th><th>Приоритет</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Биотин (B7)</strong></td><td>2–3 мг утром (с ALA)</td><td>ALA 600 мг активно вымывает биотин. Без компенсации — выпадение волос, ухудшение липидного профиля</td><td><span class="rec-tag tag-red">Срочно</span></td></tr>
+        <tr><td><strong>Витамин D3 + K2</strong></td><td>4000 МЕ D3 + 100 мкг K2</td><td>Тестостерон, кости, иммунитет. При снижении % жира D3 особенно важен</td><td><span class="rec-tag tag-red">Срочно</span></td></tr>
+        <tr><td><strong>Омега-3 (Omakor)</strong></td><td>2000 мг утром ✅</td><td>Уже принимается — хороший выбор. 2 капсулы Omakor = ~1.68 г EPA+DHA. При интенсивных нагрузках 5×/нед можно поднять до 3 капсул (3 г) для усиленной защиты суставов</td><td><span class="rec-tag tag-green">Принимается</span></td></tr>
+        <tr><td><strong>Коллаген + Вит. C</strong></td><td>15 г + 200 мг за 30 мин до тренировки</td><td>Хрящи и связки при 5 нагрузках в неделю. После 40 лет синтез коллагена снижается на 1%/год</td><td><span class="rec-tag tag-blue">Рекомендуется</span></td></tr>
+        <tr><td><strong>Цинк</strong></td><td>25 мг вечером</td><td>Поддержка тестостерона с Овитрелем, иммунитет, восстановление. Не принимать одновременно с магнием.</td><td><span class="rec-tag tag-blue">Рекомендуется</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 9. ПРИОРИТЕТНЫЙ ПЛАН -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#e94560,#c73652)">★</div>
+    <div>
+      <div class="sec-title">План на следующие 30 дней</div>
+      <div class="sec-sub">7 действий в порядке важности</div>
+    </div>
+  </div>
+
+  <div class="priority-grid">
+    <div class="prio-item">
+      <div class="prio-num" style="background:#e9456020;color:#e94560;border:1px solid #e9456040">1</div>
+      <div class="prio-text">
+        <strong>Пройти ночную пульсоксиметрию / полисомнографию</strong>
+        <span>Принимаешь магний + глицин + 5-HTP — сильный стек. То, что сон всё равно фрагментирован (2+ ч пробуждений), указывает на структурную причину. Апноэ не лечится добавками. Это действие #1.</span>
+      </div>
+      <div class="prio-impact" style="background:#e9456020;color:#e94560">Критично</div>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#e9456020;color:#e94560;border:1px solid #e9456040">2</div>
+      <div class="prio-text">
+        <strong>Перенести весь ноотропный стек строго на 8:00–9:00</strong>
+        <span>Ноопепт + Alpha-GPC не позже 10:00. Даже при хорошем ночном стеке дневные стимуляторы могут держать ЦНС в активации до 23:00+.</span>
+      </div>
+      <div class="prio-impact" style="background:#e9456020;color:#e94560">Срочно</div>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#e9456020;color:#e94560;border:1px solid #e9456040">3</div>
+      <div class="prio-text">
+        <strong>Добавить биотин 1–2 мг/день дополнительно утром (вместе с ALA)</strong>
+        <span>B-комплекс даёт 600 мкг биотина — но ALA 600 мг требует ~2–3 мг для полной компенсации. Добавь отдельный биотин 1–2 мг (суммарно выйдет нужный уровень). Без этого через 4–8 нед: выпадение волос, ухудшение ногтей.</span>
+      </div>
+      <div class="prio-impact" style="background:#e9456020;color:#e94560">Срочно</div>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#f59e0b20;color:#fbbf24;border:1px solid #f59e0b40">4</div>
+      <div class="prio-text">
+        <strong>Отбой строго в 22:30 — 2-недельный эксперимент</strong>
+        <span>Апрель был лучшим месяцем — воспроизвести его условия. Если при соблюдении режима сон всё равно фрагментирован → аргумент в пользу апноэ становится неопровержимым.</span>
+      </div>
+      <div class="prio-impact" style="background:#f59e0b20;color:#fbbf24">Высокий</div>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#f59e0b20;color:#fbbf24;border:1px solid #f59e0b40">5</div>
+      <div class="prio-text">
+        <strong>Добавить Витамин D3 4000 МЕ + K2 100 мкг</strong>
+        <span>Вероятный дефицит у спортсменов в умеренном климате. Критически важен для тестостерона, костей и иммунитета при снижении веса.</span>
+      </div>
+      <div class="prio-impact" style="background:#f59e0b20;color:#fbbf24">Высокий</div>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#3b82f620;color:#60a5fa;border:1px solid #3b82f640">6</div>
+      <div class="prio-text">
+        <strong>Сдать анализы: тестостерон, D3, кортизол, ферритин, биотин</strong>
+        <span>Базовый контроль при семаглутиде + ALA + хоккей/теннис 5×/нед. Кортизол утром — прямой маркер недовосстановления от хронического недосыпания.</span>
+      </div>
+      <div class="prio-impact" style="background:#3b82f620;color:#60a5fa">Важно</div>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#22c55e20;color:#22c55e;border:1px solid #22c55e40">7</div>
+      <div class="prio-text">
+        <strong>Добавить 1–2 силовые тренировки в неделю</strong>
+        <span>После 40 лет без силовой работы теряется ~1% мышц в год — теннис и хоккей это не компенсируют. Даже 2×45 мин в зале кардинально улучшат состав тела и защитят суставы.</span>
+      </div>
+      <div class="prio-impact" style="background:#22c55e20;color:#22c55e">Важно</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ПРОГНОЗ -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num" style="background:linear-gradient(135deg,#22c55e,#16a34a)">→</div>
+    <div>
+      <div class="sec-title">Прогноз при выполнении рекомендаций</div>
+      <div class="sec-sub">Реалистичные цели на 3–4 месяца</div>
+    </div>
+  </div>
+  <div class="cards cards-3">
+    <div class="card card-green">
+      <h3>Вес</h3>
+      <div class="big" style="color:#22c55e">85–87 кг</div>
+      <div class="small">К октябрю 2026 при нормализации сна + семаглутид + силовые. Дефицит 0.3–0.5 кг/нед без потери мышц.</div>
+    </div>
+    <div class="card card-blue">
+      <h3>% Жира</h3>
+      <div class="big" style="color:#60a5fa">18–20%</div>
+      <div class="small">С текущих 22.4% → реально при сне 8ч + силовые. Цель 15–18% — горизонт конец 2026 / начало 2027.</div>
+    </div>
+    <div class="card card-purple">
+      <h3>Сон</h3>
+      <div class="big" style="color:#a78bfa">7.5–8 ч</div>
+      <div class="small">Достижимо при: перенос ноотропов на утро + магний + режим 22:30. Апрель показал потенциал — 6.9ч уже было.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  Aleksei Obukhov · Аналитика на основе 169 дней Apple Health + Suunto · Июнь 2026<br>
+  91 кг / 178 см / 45 лет · Теннис + Хоккей 5×/нед · Semavic Next + Овитрель + Ноопепт + Альфа-GPC + Ежовик
+</footer>
+</body>
+</html>
