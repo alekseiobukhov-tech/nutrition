@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Международная гимназия Сколково</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f1117;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .presentation {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    padding: 60px 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .slide.active { display: flex; flex-direction: column; justify-content: center; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SLIDE TYPES ── */
+  .slide-title {
+    background: linear-gradient(135deg, #1a1f35 0%, #0d1b4b 50%, #0a2a5e 100%);
+    align-items: center;
+    text-align: center;
+  }
+
+  .slide-content  { background: #13161f; }
+  .slide-plus     { background: linear-gradient(135deg, #0d2318 0%, #0a1f14 100%); }
+  .slide-minus    { background: linear-gradient(135deg, #2a0d0d 0%, #1f0a0a 100%); }
+  .slide-neutral  { background: linear-gradient(135deg, #1a1530 0%, #110d24 100%); }
+  .slide-compare  { background: linear-gradient(135deg, #1a1220 0%, #120d1a 100%); }
+  .slide-final    { background: linear-gradient(135deg, #0d1f35 0%, #0a1530 100%); align-items: center; text-align: center; }
+
+  /* ── TITLE SLIDE ── */
+  .title-badge {
+    display: inline-block;
+    background: rgba(99,179,237,0.15);
+    border: 1px solid rgba(99,179,237,0.4);
+    color: #63b3ed;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+  }
+
+  .title-main {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .title-main span { color: #63b3ed; }
+
+  .title-sub {
+    font-size: 20px;
+    color: #a0aec0;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .title-stats {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 28px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 32px;
+    font-weight: 700;
+    color: #63b3ed;
+    display: block;
+  }
+
+  .stat-lbl {
+    font-size: 13px;
+    color: #718096;
+    margin-top: 4px;
+  }
+
+  /* ── SLIDE HEADER ── */
+  .slide-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .slide-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .icon-blue  { background: rgba(99,179,237,0.15); }
+  .icon-green { background: rgba(72,187,120,0.15); }
+  .icon-red   { background: rgba(252,129,74,0.15); }
+  .icon-purple{ background: rgba(159,122,234,0.15); }
+  .icon-gold  { background: rgba(236,201,75,0.15); }
+
+  .slide-title-text {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .slide-subtitle-text {
+    font-size: 14px;
+    color: #718096;
+    margin-top: 3px;
+  }
+
+  /* ── GRIDS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 22px 24px;
+  }
+
+  .card-green { border-left: 3px solid #48bb78; }
+  .card-red   { border-left: 3px solid #fc8149; }
+  .card-blue  { border-left: 3px solid #63b3ed; }
+  .card-purple{ border-left: 3px solid #9f7aea; }
+  .card-gold  { border-left: 3px solid #ecc94b; }
+
+  .card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #e2e8f0;
+  }
+
+  .card-green h3 { color: #68d391; }
+  .card-red   h3 { color: #fc8149; }
+  .card-blue  h3 { color: #63b3ed; }
+  .card-purple h3 { color: #b794f4; }
+  .card-gold  h3 { color: #ecc94b; }
+
+  .card p, .card li {
+    font-size: 14px;
+    color: #a0aec0;
+    line-height: 1.65;
+  }
+
+  .card ul { padding-left: 16px; }
+  .card li { margin-bottom: 5px; }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin: 2px;
+    font-weight: 500;
+  }
+
+  .tag-blue   { background: rgba(99,179,237,0.15); color: #63b3ed; border: 1px solid rgba(99,179,237,0.3); }
+  .tag-green  { background: rgba(72,187,120,0.15); color: #48bb78; border: 1px solid rgba(72,187,120,0.3); }
+  .tag-orange { background: rgba(252,129,74,0.15);  color: #fc8149; border: 1px solid rgba(252,129,74,0.3); }
+  .tag-purple { background: rgba(159,122,234,0.15); color: #9f7aea; border: 1px solid rgba(159,122,234,0.3); }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #718096;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  td {
+    font-size: 14px;
+    color: #cbd5e0;
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+
+  .td-highlight { color: #63b3ed; font-weight: 600; }
+  .td-green     { color: #68d391; font-weight: 600; }
+  .td-red       { color: #fc8149; }
+
+  /* ── SCORE BARS ── */
+  .score-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 14px;
+  }
+
+  .score-label {
+    font-size: 13px;
+    color: #a0aec0;
+    width: 220px;
+    flex-shrink: 0;
+  }
+
+  .score-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .score-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+
+  .score-val {
+    font-size: 13px;
+    font-weight: 600;
+    width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bar-5 { width: 100%; }
+  .bar-4 { width: 80%;  }
+  .bar-3 { width: 60%;  }
+  .bar-2 { width: 40%;  }
+  .bar-1 { width: 20%;  }
+
+  .bar-green  { background: linear-gradient(90deg, #38a169, #68d391); }
+  .bar-blue   { background: linear-gradient(90deg, #2b6cb0, #63b3ed); }
+  .bar-orange { background: linear-gradient(90deg, #c05621, #fc8149); }
+  .bar-purple { background: linear-gradient(90deg, #6b46c1, #9f7aea); }
+  .bar-gold   { background: linear-gradient(90deg, #b7791f, #ecc94b); }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 32px; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 16px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #63b3ed;
+    border: 2px solid #0f1117;
+  }
+
+  .timeline-item h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 4px;
+  }
+
+  .timeline-item p {
+    font-size: 13px;
+    color: #718096;
+    line-height: 1.5;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: rgba(99,179,237,0.08);
+    border: 1px solid rgba(99,179,237,0.25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #bee3f8;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  .callout-warn {
+    background: rgba(252,129,74,0.08);
+    border-color: rgba(252,129,74,0.25);
+    color: #fbd38d;
+  }
+
+  .callout strong { color: #fff; }
+
+  /* ── PRICE TABLE ── */
+  .price-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .price-card.featured {
+    border-color: rgba(99,179,237,0.4);
+    background: rgba(99,179,237,0.06);
+  }
+
+  .price-amount {
+    font-size: 36px;
+    font-weight: 700;
+    color: #63b3ed;
+    line-height: 1;
+    margin: 10px 0;
+  }
+
+  .price-period {
+    font-size: 13px;
+    color: #718096;
+  }
+
+  .price-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #a0aec0;
+    margin-bottom: 6px;
+  }
+
+  /* ── NAVIGATION ── */
+  .nav {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    padding: 10px 24px;
+    z-index: 100;
+  }
+
+  .nav button {
+    background: none;
+    border: none;
+    color: #a0aec0;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .nav button:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .nav button:disabled { opacity: 0.2; cursor: default; }
+
+  .nav-info {
+    font-size: 13px;
+    color: #718096;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  /* ── DOTS ── */
+  .dots {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dot.active { background: #63b3ed; transform: scale(1.3); }
+
+  /* ── SLIDE NUMBER ── */
+  .slide-num {
+    position: fixed;
+    top: 28px;
+    right: 70px;
+    font-size: 12px;
+    color: #4a5568;
+    z-index: 100;
+  }
+
+  /* ── LOGO AREA ── */
+  .logo-area {
+    position: fixed;
+    top: 24px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+  }
+
+  .logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #63b3ed;
+  }
+
+  .logo-text {
+    font-size: 12px;
+    color: #4a5568;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── TWO COLUMN ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #4a5568;
+    margin-bottom: 16px;
+  }
+
+  .highlight-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #63b3ed;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .highlight-sub {
+    font-size: 13px;
+    color: #718096;
+  }
+
+  .divider {
+    width: 40px;
+    height: 3px;
+    background: #63b3ed;
+    border-radius: 2px;
+    margin: 20px 0;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist li {
+    list-style: none;
+    font-size: 14px;
+    color: #a0aec0;
+    padding: 6px 0;
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #48bb78;
+    font-weight: 700;
+  }
+
+  .checklist.cross li::before {
+    content: '✗';
+    color: #fc8149;
+  }
+
+  /* ── QUOTE ── */
+  .quote {
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid #9f7aea;
+    padding: 16px 20px;
+    border-radius: 0 10px 10px 0;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #b794f4;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .quote-source {
+    font-size: 12px;
+    color: #4a5568;
+    font-style: normal;
+    margin-top: 6px;
+  }
+
+  /* keyboard hint */
+  .key-hint {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    font-size: 11px;
+    color: #2d3748;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="logo-area">
+  <div class="logo-dot"></div>
+  <span class="logo-text">Гимназия Сколково · Анализ</span>
+</div>
+
+<div class="slide-num" id="slideNum">1 / 16</div>
+
+<div class="dots" id="dots"></div>
+
+<div class="presentation" id="presentation">
+
+  <!-- SLIDE 1: TITLE -->
+  <div class="slide slide-title active">
+    <div class="title-badge">Аналитический обзор · 2025–2026</div>
+    <div class="title-main">Международная<br>гимназия <span>«Сколково»</span></div>
+    <div class="title-sub">Детальный анализ для родителей. Старшие классы 8–11.</div>
+    <div class="title-stats">
+      <div class="stat-box">
+        <span class="stat-num">2015</span>
+        <div class="stat-lbl">Год основания</div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">IB</span>
+        <div class="stat-lbl">Аккредитация с 2019</div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">38/45</span>
+        <div class="stat-lbl">Средний балл IB</div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">Топ-5</span>
+        <div class="stat-lbl">Forbes Education</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: О ШКОЛЕ -->
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <div class="slide-icon icon-blue">🏫</div>
+      <div>
+        <div class="slide-title-text">О школе: ключевые факты</div>
+        <div class="slide-subtitle-text">Что представляет собой гимназия</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card card-blue">
+        <h3>Основание и статус</h3>
+        <ul>
+          <li>Учреждена Фондом «Сколково» в 2015 году</li>
+          <li>Некоммерческая частная школа</li>
+          <li>Расположена на территории иннограда Сколково</li>
+          <li>Обучение: детский сад → 11 класс</li>
+        </ul>
+      </div>
+      <div class="card card-blue">
+        <h3>Программы</h3>
+        <ul>
+          <li><strong>ФГОС</strong> — российский стандарт</li>
+          <li><strong>IB PYP</strong> — начальная школа</li>
+          <li><strong>IB MYP</strong> — 5–9 классы</li>
+          <li><strong>IB DP</strong> — 10–11 классы</li>
+          <li>Обе программы параллельно</li>
+        </ul>
+      </div>
+      <div class="card card-blue">
+        <h3>Философия</h3>
+        <ul>
+          <li>«Без образовательного террора»</li>
+          <li>Детей называют «студентами»</li>
+          <li>Каждый урок — исследовательский вопрос</li>
+          <li>Партнёрство со Сколтехом</li>
+          <li>Интеграция в экосистему Сколково</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="margin-top: 20px;">
+      <strong>Главная идея:</strong> школа работает как мини-университет — исследования, проекты и выбор треков начинаются с 8–9 класса. Нет жёсткой гонки за оценками, но есть высокие ожидания к самостоятельности ученика.
+    </div>
+  </div>
+
+  <!-- SLIDE 3: ПЛЮСЫ — ОБРАЗОВАНИЕ -->
+  <div class="slide slide-plus">
+    <div class="slide-header">
+      <div class="slide-icon icon-green">📚</div>
+      <div>
+        <div class="slide-title-text">Плюсы: образовательная программа</div>
+        <div class="slide-subtitle-text">Почему школа входит в топ-5 Москвы</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-green" style="margin-bottom: 16px;">
+          <h3>Двойной диплом</h3>
+          <p>Выпускники получают <strong>российский аттестат + IB Diploma</strong> одновременно. Средний балл по IB — 38/45 при мировом среднем ~30 баллов. Максимум 45 получает лишь 1% выпускников IB в мире.</p>
+        </div>
+        <div class="card card-green">
+          <h3>Результаты выпускников</h3>
+          <p>Поступают в: <strong>МГУ, МФТИ, ВШЭ, МГИМО, Бауманку, МИСиС, Сеченовский, РАНХиГС</strong>, а также в зарубежные университеты. Один из выпускников — 1590/1600 на SAT.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card card-green" style="margin-bottom: 16px;">
+          <h3>Карьерный центр (с 8 класса)</h3>
+          <ul>
+            <li>Профориентация и консультации</li>
+            <li>Помощь с выбором университета</li>
+            <li>Составление портфолио и эссе</li>
+            <li>Стажировки в компаниях Сколково</li>
+            <li>Первый профессиональный опыт</li>
+          </ul>
+        </div>
+        <div class="card card-green">
+          <h3>Бесплатное обучение</h3>
+          <p>С <strong>7 класса</strong> — победители олимпиад, кейс-чемпионатов, технологических и международных конкурсов учатся <strong>бесплатно</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: ПЛЮСЫ — СРЕДА -->
+  <div class="slide slide-plus">
+    <div class="slide-header">
+      <div class="slide-icon icon-green">🏊</div>
+      <div>
+        <div class="slide-title-text">Плюсы: среда и инфраструктура</div>
+        <div class="slide-subtitle-text">Физическая среда и атмосфера</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card card-green">
+        <h3>Инфраструктура</h3>
+        <ul>
+          <li>25-метровый бассейн</li>
+          <li>Два спортзала</li>
+          <li>Танцевальный зал</li>
+          <li>Современная библиотека</li>
+          <li>Хорошее питание</li>
+          <li>Лаборатории Сколтеха</li>
+        </ul>
+      </div>
+      <div class="card card-green">
+        <h3>Методика преподавания</h3>
+        <ul>
+          <li>Уроки-дискуссии, не монолог</li>
+          <li>Никаких «у доски с ответом»</li>
+          <li>Критериальная оценка, не баллы</li>
+          <li>Презентации и раздаточные материалы</li>
+          <li>Уважение к ученику как к личности</li>
+        </ul>
+      </div>
+      <div class="card card-green">
+        <h3>Уникальная экосистема</h3>
+        <ul>
+          <li>Мастер-классы компаний Сколково</li>
+          <li>Занятия с преподавателями Сколтеха</li>
+          <li>Авиасимулятор Boeing</li>
+          <li>Партнёрство с музеем «Гараж»</li>
+          <li>Кружки: программирование, шахматы, дизайн</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="margin-top: 18px;">
+      <strong>Уникальное преимущество:</strong> физическое нахождение внутри инновационного центра даёт доступ к технологической и предпринимательской среде, которой нет ни у одной другой школы Москвы.
+    </div>
+  </div>
+
+  <!-- SLIDE 5: МИНУСЫ — КРИТИКА -->
+  <div class="slide slide-minus">
+    <div class="slide-header">
+      <div class="slide-icon icon-red">⚠️</div>
+      <div>
+        <div class="slide-title-text">Минусы: критические отзывы</div>
+        <div class="slide-subtitle-text">То, о чём не говорят на открытых днях</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-red" style="margin-bottom: 16px;">
+          <h3>Текучка учителей</h3>
+          <p>Наиболее частая жалоба. За учебный год может смениться несколько учителей по одному предмету. Особенно остро в средней и старшей школе.</p>
+          <div class="quote" style="margin-top: 10px; font-size: 13px;">"Постоянная текучка кадров, многие родители недовольны, но молчат — учителя получают за жалобы"</div>
+        </div>
+        <div class="card card-red">
+          <h3>Слабость старшей школы</h3>
+          <p>Прямой отзыв: «средняя и старшая школа сейчас слабее с точки зрения набора классов и педагогов». Сильнее всего школа в начальных классах.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card card-red" style="margin-bottom: 16px;">
+          <h3>Отсутствие чёткой программы</h3>
+          <p>Часть родителей отмечает: «учитель придумывает темы и подачу на ходу». Нет системности в некоторых предметах. Школа много экспериментирует.</p>
+        </div>
+        <div class="card card-red">
+          <h3>Слабая подготовка к ЕГЭ</h3>
+          <p>Школа <em>сознательно</em> не натаскивает на ЕГЭ. Если цель — высокие баллы на госэкзамене, нужно дополнительно заниматься с репетиторами — это дополнительные расходы.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top: 16px;">
+      <strong>Важно:</strong> «пузырь» изолированной среды Сколково — некоторые выпускники отмечают сложности с адаптацией к обычной университетской среде после окончания школы.
+    </div>
+  </div>
+
+  <!-- SLIDE 6: МИНУСЫ — ПРАКТИКА -->
+  <div class="slide slide-minus">
+    <div class="slide-header">
+      <div class="slide-icon icon-red">💸</div>
+      <div>
+        <div class="slide-title-text">Минусы: практические факторы</div>
+        <div class="slide-subtitle-text">Деньги, дорога, логистика</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="card card-red" style="margin-bottom: 16px;">
+          <h3>Стоимость (2026–2027)</h3>
+          <table style="margin-top: 8px;">
+            <tr>
+              <td style="color: #a0aec0; padding: 6px 0;">Семьи экосистемы Сколково</td>
+              <td class="td-highlight" style="text-align: right;">~79 380 руб/мес</td>
+            </tr>
+            <tr>
+              <td style="color: #a0aec0; padding: 6px 0;">Внешние ученики</td>
+              <td class="td-red" style="text-align: right; font-weight: 600;">~177 444 руб/мес</td>
+            </tr>
+            <tr>
+              <td style="color: #a0aec0; padding: 6px 0;">Вступительный взнос (разово)</td>
+              <td style="color: #fc8149; text-align: right; font-weight: 600;">160 000 руб</td>
+            </tr>
+            <tr>
+              <td style="color: #a0aec0; padding: 6px 0;">Итого за учебный год (внешние)</td>
+              <td style="color: #fc8149; text-align: right; font-weight: 700; font-size: 15px;">~2,3 млн руб</td>
+            </tr>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          Ряд отзывов: <strong>«содержание не дотягивает до сопоставимого по цене уровня»</strong> для внешних учеников. Для семей экосистемы цена вполне обоснована.
+        </div>
+      </div>
+      <div>
+        <div class="card card-red" style="margin-bottom: 16px;">
+          <h3>Расположение и транспорт</h3>
+          <ul>
+            <li>За МКАД, ул. Зворыкина, 4</li>
+            <li>Из центра: 45–70 мин на транспорте</li>
+            <li>На машине в час пик: до 1,5 часов</li>
+            <li>Нет организованного школьного автобуса</li>
+            <li>Проблемная парковка — очереди на КПП</li>
+          </ul>
+        </div>
+        <div class="card card-red">
+          <h3>Маленький класс</h3>
+          <p>15–20 человек в классе — плюс для индивидуального внимания, но <strong>минус для социализации</strong>: меньше разных людей, конкуренция ощущается острее, меньше «случайных» знакомств.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: ПРОГРАММА 8-9 -->
+  <div class="slide slide-neutral">
+    <div class="slide-header">
+      <div class="slide-icon icon-purple">🔬</div>
+      <div>
+        <div class="slide-title-text">Программа 8–9 классов</div>
+        <div class="slide-subtitle-text">Переходный период и выбор трека</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-purple" style="margin-bottom: 16px;">
+          <h3>Учебная структура (IB MYP)</h3>
+          <ul>
+            <li>ФГОС + IB Middle Years Programme параллельно</li>
+            <li>Предметы: математика, русский, английский, история, физика, химия, биология, информатика, 2-й иностранный</li>
+            <li>Критериальная оценка вместо баллов</li>
+            <li>В конце семестра — детальные отчёты учителей с рекомендациями</li>
+          </ul>
+        </div>
+        <div class="card card-purple">
+          <h3>8 класс: начало исследования</h3>
+          <ul>
+            <li>В конце 8 класса — самостоятельный выбор темы исследовательского проекта</li>
+            <li>Второй половины дня — курсы по выбору и кружки</li>
+            <li>Карьерный центр: первые консультации по профориентации</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card card-purple" style="margin-bottom: 16px;">
+          <h3>9 класс: личный проект</h3>
+          <ul>
+            <li>В начале 9 класса — «дорожная карта» проекта</li>
+            <li>Весь год — разработка исследования</li>
+            <li>В апреле — публичная защита перед комиссией</li>
+            <li>Это не реферат, а настоящая исследовательская работа</li>
+          </ul>
+        </div>
+        <div class="card card-purple">
+          <h3>Завершение 9 класса</h3>
+          <ul>
+            <li>Все сдают <strong>ОГЭ</strong> (обязательно)</li>
+            <li>Аттестат особого формата (Рособрнадзор)</li>
+            <li>Выбор трека для 10–11 класса: ЕГЭ или IB</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: ПРОГРАММА 10-11 -->
+  <div class="slide slide-neutral">
+    <div class="slide-header">
+      <div class="slide-icon icon-purple">🎓</div>
+      <div>
+        <div class="slide-title-text">Программа 10–11 классов</div>
+        <div class="slide-subtitle-text">Два трека: российские вузы или международные</div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-bottom: 20px;">
+      <div class="card card-blue">
+        <h3>Трек А: Российские вузы (ЕГЭ)</h3>
+        <ul>
+          <li>Обучение по ФГОС с углублёнными предметами</li>
+          <li>Подготовка к ЕГЭ (но без «натаскивания»)</li>
+          <li>Исследовательские проекты сохраняются</li>
+          <li>Поступление в МГУ, МФТИ, ВШЭ и др.</li>
+        </ul>
+        <div style="margin-top: 10px;">
+          <span class="tag tag-blue">ФГОС</span>
+          <span class="tag tag-blue">ЕГЭ</span>
+          <span class="tag tag-blue">Российские вузы</span>
+        </div>
+      </div>
+      <div class="card card-purple">
+        <h3>Трек Б: Зарубежные вузы (IB DP)</h3>
+        <ul>
+          <li>IB Diploma Programme — полный курс</li>
+          <li>6 предметов на стандартном/высшем уровне</li>
+          <li>Extended Essay (научная работа 4000 слов)</li>
+          <li>Theory of Knowledge (TOK)</li>
+          <li>CAS — Creativity, Activity, Service</li>
+          <li>Финальные экзамены IB в мае 11 класса</li>
+        </ul>
+        <div style="margin-top: 10px;">
+          <span class="tag tag-purple">IB Diploma</span>
+          <span class="tag tag-purple">Зарубежные вузы</span>
+          <span class="tag tag-blue">Можно совмещать с ЕГЭ</span>
+        </div>
+      </div>
+    </div>
+    <div class="card card-gold">
+      <h3>Карьерный центр в 10–11 классах</h3>
+      <p>Помощь с выбором университета · Написание мотивационных эссе · Формирование портфолио · Подготовка к интервью · Stажировки · Поступление в вуз мечты как финальный результат</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: ВЫПУСКНИКИ И ВУЗЫ -->
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <div class="slide-icon icon-gold">🏆</div>
+      <div>
+        <div class="slide-title-text">Куда поступают выпускники</div>
+        <div class="slide-subtitle-text">Реальные результаты по российским и зарубежным вузам</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Вуз</th>
+              <th>Направление</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>ВШЭ</td><td>Экономика, IT, дизайн</td><td class="td-green">Топ по числу</td></tr>
+            <tr><td>МГУ</td><td>Разные факультеты</td><td class="td-highlight">Регулярно</td></tr>
+            <tr><td>МФТИ</td><td>Физтех, AI</td><td class="td-highlight">Регулярно</td></tr>
+            <tr><td>Бауманка</td><td>Инженерия</td><td class="td-highlight">Регулярно</td></tr>
+            <tr><td>МГИМО</td><td>Межд. отношения</td><td class="td-highlight">Регулярно</td></tr>
+            <tr><td>МИСиС</td><td>Материаловедение, IT</td><td class="td-highlight">Регулярно</td></tr>
+            <tr><td>Сеченовский</td><td>Медицина</td><td class="td-highlight">Регулярно</td></tr>
+            <tr><td>РАНХиГС</td><td>Управление</td><td class="td-highlight">Регулярно</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="card card-gold" style="margin-bottom: 14px;">
+          <h3>Средний балл IB выпускников</h3>
+          <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 6px;">
+            <span style="font-size: 52px; font-weight: 700; color: #ecc94b; line-height: 1;">38</span>
+            <span style="color: #718096; font-size: 14px;">из 45 возможных<br>Мировое среднее: ~30</span>
+          </div>
+        </div>
+        <div class="card card-gold">
+          <h3>Важная оговорка</h3>
+          <p>Разброс вузов «от МФТИ до сельхозакадемии» означает, что школа <strong>не отбирает только академически сильных детей</strong>. Берут всех, кто прошёл собеседование. Средний уровень класса может быть очень разным.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: СРАВНЕНИЕ ШО -->
+  <div class="slide slide-compare">
+    <div class="slide-header">
+      <div class="slide-icon icon-blue">⚖️</div>
+      <div>
+        <div class="slide-title-text">Сравнение с топ-школами Москвы</div>
+        <div class="slide-subtitle-text">Конкуренты в сегменте премиальных частных школ</div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Школа</th>
+          <th>Подход</th>
+          <th>Цена (внешние)</th>
+          <th>IB</th>
+          <th>Пансион</th>
+          <th>Уникальность</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-highlight">Гимназия Сколково</td>
+          <td>Инновации, исследования</td>
+          <td class="td-red">~177 000/мес</td>
+          <td class="td-green">Да (PYP+MYP+DP)</td>
+          <td>Нет</td>
+          <td>Экосистема Сколково, Сколтех</td>
+        </tr>
+        <tr>
+          <td style="color: #e2e8f0;">Летово</td>
+          <td>Академические таланты</td>
+          <td>~200 000/мес</td>
+          <td class="td-green">Да</td>
+          <td class="td-green">Да (80% стипендии)</td>
+          <td>Лидер рейтингов, пансион</td>
+        </tr>
+        <tr>
+          <td style="color: #e2e8f0;">Хорошкола</td>
+          <td>Мягкая, гибкий график</td>
+          <td>~120 000/мес</td>
+          <td class="td-green">Да</td>
+          <td>Нет</td>
+          <td>Ровесничество, инд. маршрут</td>
+        </tr>
+        <tr>
+          <td style="color: #e2e8f0;">Новая школа</td>
+          <td>Проектный, диалог</td>
+          <td>~100 000/мес</td>
+          <td>Нет</td>
+          <td>Нет</td>
+          <td>Доступнее, сильная атмосфера</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout" style="margin-top: 20px;">
+      <strong>Вывод:</strong> Сколково — дороже Хорошколы и Новой школы, но дешевле Летово. Главное отличие — уникальная привязка к инновационному центру. Летово сильнее академически и по стабильности, но требует пансиона или близкого расположения.
+    </div>
+  </div>
+
+  <!-- SLIDE 11: ПОСТУПЛЕНИЕ -->
+  <div class="slide slide-neutral">
+    <div class="slide-header">
+      <div class="slide-icon icon-blue">📋</div>
+      <div>
+        <div class="slide-title-text">Поступление в 8–11 класс</div>
+        <div class="slide-subtitle-text">Процедура, сроки, условия</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>Февраль–апрель — Подача заявки</h4>
+            <p>Онлайн на сайте gymnasium.sk.ru. Основная приёмная волна. Если остаются места — дополнительный набор летом.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Вступительные испытания</h4>
+            <p>Тестирование по основным предметам. На сайте есть примеры заданий. Цель — оценить совместимость ребёнка и возможностей школы, не отбор «умников».</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Решение Правления гимназии</h4>
+            <p>Комментарии по ошибкам и копии работ не выдаются. Очный просмотр работ возможен для классов 2–10.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Подписание договора</h4>
+            <p>10 рабочих дней после положительного решения. Вступительный взнос: 160 000 руб (разово).</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-blue" style="margin-bottom: 14px;">
+          <h3>Нюансы для старших классов</h3>
+          <ul>
+            <li>В 1-й и 5-й класс — приоритет «своим», внешний набор минимален</li>
+            <li>В 8–11 класс поступить <strong>проще</strong> — чаще есть свободные места</li>
+            <li>Набор небольшой: 1–2 класса на параллели, 15–20 чел. в классе</li>
+          </ul>
+        </div>
+        <div class="card card-blue">
+          <h3>Сроки 2026–2027</h3>
+          <p>Приёмная кампания <strong>закрыта</strong>. Открытый день был в марте. Следующая кампания — <strong>февраль 2027 года</strong>.</p>
+          <p style="margin-top: 8px;">Контакт: <span style="color: #63b3ed;">admissions.gymn@sk.ru</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: ТРАНСПОРТ -->
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <div class="slide-icon icon-blue">🚌</div>
+      <div>
+        <div class="slide-title-text">Логистика и транспорт</div>
+        <div class="slide-subtitle-text">Реальная картина: как добраться и сколько времени</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table>
+          <thead>
+            <tr><th>Откуда</th><th>Маршрут</th><th>Время</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>м. Славянский бульвар</td>
+              <td>Автобус №818</td>
+              <td class="td-green">20–30 мин</td>
+            </tr>
+            <tr>
+              <td>м. Мякинино</td>
+              <td>Автобус №869</td>
+              <td class="td-green">15–20 мин</td>
+            </tr>
+            <tr>
+              <td>м. Киевская</td>
+              <td>Автобус №840</td>
+              <td class="td-highlight">30–40 мин</td>
+            </tr>
+            <tr>
+              <td>МЦД-4 (любая станция)</td>
+              <td>До «Солнечная» / «Мещерская» → SK3</td>
+              <td class="td-highlight">Зависит от района</td>
+            </tr>
+            <tr>
+              <td>Центр Москвы (машина)</td>
+              <td>Можайское / Рублёвское ш.</td>
+              <td class="td-red">40–90 мин (пробки)</td>
+            </tr>
+            <tr>
+              <td>Одинцово / ЖК рядом</td>
+              <td>Машина / автобус</td>
+              <td class="td-green">10–15 мин</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top: 8px; font-size: 12px; color: #4a5568;">С ноября 2024 — новые внутренние маршруты SK2, SK3, SK4 на территории Сколково</div>
+      </div>
+      <div>
+        <div class="card card-red" style="margin-bottom: 14px;">
+          <h3>Реальные проблемы</h3>
+          <ul>
+            <li>Нет организованного школьного автобуса</li>
+            <li>Въезд в иннограде через КПП — бывают очереди</li>
+            <li>Парковка проблемная</li>
+            <li>1,5 часа дороги в день — серьёзная нагрузка на подростка</li>
+          </ul>
+        </div>
+        <div class="card card-green">
+          <h3>Для кого логистика ОК</h3>
+          <ul>
+            <li>Семьи из Одинцово, Можайского района</li>
+            <li>ЖК Сколково и ближайшие ЖК</li>
+            <li>Западные районы Москвы (Кунцево, Фили, Крылатское)</li>
+            <li>Те, кто работает в Сколково и едет вместе</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: РЕЙТИНГ -->
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <div class="slide-icon icon-gold">📊</div>
+      <div>
+        <div class="slide-title-text">Оценка по ключевым параметрам</div>
+        <div class="slide-subtitle-text">Взвешенная оценка для старших классов (8–11)</div>
+      </div>
+    </div>
+    <div style="max-width: 640px; margin: 0 auto;">
+      <div class="score-row">
+        <div class="score-label">Международное поступление (IB)</div>
+        <div class="score-bar-bg"><div class="score-bar bar-5 bar-green"></div></div>
+        <div class="score-val" style="color: #68d391;">5/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Инфраструктура и среда</div>
+        <div class="score-bar-bg"><div class="score-bar bar-5 bar-green"></div></div>
+        <div class="score-val" style="color: #68d391;">5/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Атмосфера и отношение к детям</div>
+        <div class="score-bar-bg"><div class="score-bar bar-4 bar-blue"></div></div>
+        <div class="score-val" style="color: #63b3ed;">4/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Поступление в российские вузы (ЕГЭ)</div>
+        <div class="score-bar-bg"><div class="score-bar bar-4 bar-blue"></div></div>
+        <div class="score-val" style="color: #63b3ed;">4/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Соотношение цена/качество (внешние)</div>
+        <div class="score-bar-bg"><div class="score-bar bar-3 bar-gold"></div></div>
+        <div class="score-val" style="color: #ecc94b;">3/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Логистика (средний район Москвы)</div>
+        <div class="score-bar-bg"><div class="score-bar bar-3 bar-gold"></div></div>
+        <div class="score-val" style="color: #ecc94b;">3/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Стабильность преподавателей</div>
+        <div class="score-bar-bg"><div class="score-bar bar-2 bar-orange"></div></div>
+        <div class="score-val" style="color: #fc8149;">2/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Подготовка к ЕГЭ «из коробки»</div>
+        <div class="score-bar-bg"><div class="score-bar bar-2 bar-orange"></div></div>
+        <div class="score-val" style="color: #fc8149;">2/5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: КТО УЧИТСЯ -->
+  <div class="slide slide-neutral">
+    <div class="slide-header">
+      <div class="slide-icon icon-purple">👨‍👩‍👧</div>
+      <div>
+        <div class="slide-title-text">Кто учится: состав учеников</div>
+        <div class="slide-subtitle-text">Соотношение «своих» и внешних, профиль родителей</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-purple" style="margin-bottom: 16px;">
+          <h3>Соотношение учеников (всего 768)</h3>
+          <div style="display: flex; gap: 20px; align-items: center; margin-top: 12px;">
+            <div style="flex: 1;">
+              <div style="height: 12px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                <div style="width: 74%; height: 100%; background: linear-gradient(90deg, #6b46c1, #9f7aea); border-radius: 6px;"></div>
+              </div>
+              <div style="font-size: 13px; color: #a0aec0; margin-top: 6px;">Дети сотрудников Сколково — <strong style="color: #b794f4;">74%</strong></div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 20px; align-items: center; margin-top: 10px;">
+            <div style="flex: 1;">
+              <div style="height: 12px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden;">
+                <div style="width: 26%; height: 100%; background: linear-gradient(90deg, #2b6cb0, #63b3ed); border-radius: 6px;"></div>
+              </div>
+              <div style="font-size: 13px; color: #a0aec0; margin-top: 6px;">Внешние ученики (Москва и МО) — <strong style="color: #63b3ed;">26%</strong></div>
+            </div>
+          </div>
+          <div class="callout" style="margin-top: 14px; font-size: 13px;">
+            Соотношение постепенно смещается в сторону «своих» по мере роста числа семей в иннограде.
+          </div>
+        </div>
+        <div class="card card-purple">
+          <h3>Типы родителей-«сколковцев»</h3>
+          <table style="margin-top: 8px;">
+            <tr>
+              <td style="color: #b794f4; font-weight: 600; padding: 5px 0;">Основатели и сотрудники стартапов</td>
+              <td style="color: #a0aec0; font-size: 13px; padding: 5px 0 5px 12px;">IT, биомед, энергетика, космос</td>
+            </tr>
+            <tr>
+              <td style="color: #b794f4; font-weight: 600; padding: 5px 0;">Учёные и преподаватели Сколтеха</td>
+              <td style="color: #a0aec0; font-size: 13px; padding: 5px 0 5px 12px;">Исследователи, профессора</td>
+            </tr>
+            <tr>
+              <td style="color: #b794f4; font-weight: 600; padding: 5px 0;">Сотрудники Фонда «Сколково»</td>
+              <td style="color: #a0aec0; font-size: 13px; padding: 5px 0 5px 12px;">Менеджеры, юристы, аналитики</td>
+            </tr>
+            <tr>
+              <td style="color: #b794f4; font-weight: 600; padding: 5px 0;">Внешние семьи (26%)</td>
+              <td style="color: #a0aec0; font-size: 13px; padding: 5px 0 5px 12px;">Предприниматели, топ-менеджеры</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card card-blue" style="margin-bottom: 16px;">
+          <h3>Портрет родителя</h3>
+          <ul>
+            <li style="font-size: 14px; color: #a0aec0; margin-bottom: 8px; line-height: 1.5;">Высшее (часто международное) образование</li>
+            <li style="font-size: 14px; color: #a0aec0; margin-bottom: 8px; line-height: 1.5;">Часто — опыт работы или учёбы за рубежом</li>
+            <li style="font-size: 14px; color: #a0aec0; margin-bottom: 8px; line-height: 1.5;">Активно вовлечены в жизнь школы</li>
+            <li style="font-size: 14px; color: #a0aec0; margin-bottom: 8px; line-height: 1.5;">Технологический / предпринимательский кругозор</li>
+            <li style="font-size: 14px; color: #a0aec0; line-height: 1.5;">Ориентируются на международное будущее детей</li>
+          </ul>
+        </div>
+        <div class="card card-gold">
+          <h3>Что это даёт ребёнку</h3>
+          <p style="font-size: 14px; color: #a0aec0; line-height: 1.6; margin-bottom: 8px;"><strong style="color: #ecc94b;">Плюс:</strong> среда сверстников — дети думающих, технически грамотных, путешествовавших людей. Высокая вероятность полезных связей.</p>
+          <p style="font-size: 14px; color: #a0aec0; line-height: 1.6;"><strong style="color: #fc8149;">Минус:</strong> «пузырь» — очень однородная среда без знакомства с реальным социальным разнообразием. Закрытый иннограда усиливает изолированность.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 16: НАЦИОНАЛЬНЫЙ СОСТАВ И БЛАГОСОСТОЯНИЕ -->
+  <div class="slide slide-neutral">
+    <div class="slide-header">
+      <div class="slide-icon icon-gold">🌍</div>
+      <div>
+        <div class="slide-title-text">Национальный состав и благосостояние</div>
+        <div class="slide-subtitle-text">Международность, уровень дохода семей, социальный срез</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-gold" style="margin-bottom: 16px;">
+          <h3>Национальный состав</h3>
+          <p style="font-size: 14px; color: #a0aec0; line-height: 1.65; margin-bottom: 10px;">Школа не публикует точных данных. По косвенным признакам:</p>
+          <ul>
+            <li style="font-size: 14px; color: #a0aec0; margin-bottom: 7px; padding-left: 16px; list-style: none; position: relative;"><span style="position: absolute; left: 0; color: #ecc94b;">▸</span> Подавляющее большинство — <strong style="color: #e2e8f0;">россияне</strong>, часто с международным бэкграундом</li>
+            <li style="font-size: 14px; color: #a0aec0; margin-bottom: 7px; padding-left: 16px; list-style: none; position: relative;"><span style="position: absolute; left: 0; color: #ecc94b;">▸</span> Небольшая доля семей из <strong style="color: #e2e8f0;">СНГ и Азии</strong></li>
+            <li style="font-size: 14px; color: #a0aec0; margin-bottom: 7px; padding-left: 16px; list-style: none; position: relative;"><span style="position: absolute; left: 0; color: #ecc94b;">▸</span> После 2022 года число западных экспатов <strong style="color: #fc8149;">резко сократилось</strong></li>
+            <li style="font-size: 14px; color: #a0aec0; padding-left: 16px; list-style: none; position: relative;"><span style="position: absolute; left: 0; color: #ecc94b;">▸</span> Есть дети, выросшие или учившиеся за рубежом («вернувшиеся»)</li>
+          </ul>
+          <div class="callout callout-warn" style="margin-top: 12px; font-size: 13px;">
+            Это <strong>не международная школа</strong> в смысле 30–40% иностранцев. Это российская частная школа с международной программой.
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-blue" style="margin-bottom: 16px;">
+          <h3>Уровень благосостояния семей</h3>
+          <table style="margin-top: 8px;">
+            <thead>
+              <tr>
+                <th>Категория</th>
+                <th>Стоимость/год</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color: #a0aec0;">Семьи Сколково</td>
+                <td class="td-highlight">~950 000 руб</td>
+              </tr>
+              <tr>
+                <td style="color: #a0aec0;">Внешние семьи</td>
+                <td class="td-red">~2 300 000 руб</td>
+              </tr>
+              <tr>
+                <td style="color: #a0aec0;">+ Вступительный взнос</td>
+                <td style="color: #fc8149; font-weight: 600;">160 000 руб</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 13px; color: #718096; margin-top: 10px; line-height: 1.5;">Для внешних семей: порог ~2,3 млн/год — это <strong style="color: #a0aec0;">верхние 5–10% по доходам в России</strong>. Для сколковских семей порог ниже, но всё равно требует высокого дохода.</p>
+        </div>
+        <div class="card card-green">
+          <h3>Итоговый социальный портрет</h3>
+          <p style="font-size: 14px; color: #a0aec0; line-height: 1.65;">Не школа олигархов и миллиардеров (это скорее «Летово» или зарубежные boarding schools), а школа <strong style="color: #68d391;">высокообразованного технологического класса</strong> — предпринимателей, учёных, IT-руководителей с международным кругозором.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 17 (финальный): ИТОГ -->
+  <div class="slide slide-final">
+    <div class="title-badge">Итоговый вывод</div>
+    <div class="title-main" style="font-size: 40px; max-width: 800px; margin: 0 auto 24px;">
+      Кому подходит гимназия <span>«Сколково»</span>?
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto; text-align: left;">
+      <div class="card card-green">
+        <h3>✓ Выбирайте, если:</h3>
+        <ul class="checklist" style="margin-top: 8px;">
+          <li>Цель — зарубежный университет (IB)</li>
+          <li>Ребёнок самомотивирован, умеет учиться без давления</li>
+          <li>Важны мягкий подход и уважение к личности</li>
+          <li>Семья живёт западнее/юго-западнее Москвы</li>
+          <li>Готовы к активному участию родителей</li>
+          <li>Нужна уникальная инновационная среда</li>
+        </ul>
+      </div>
+      <div class="card card-red">
+        <h3>✗ Ищите альтернативу, если:</h3>
+        <ul class="checklist cross" style="margin-top: 8px;">
+          <li>Нужна высокая подготовка к ЕГЭ «из коробки»</li>
+          <li>Ребёнок нуждается в стабильной, предсказуемой среде</li>
+          <li>Дорога занимает больше 1,5 часов ежедневно</li>
+          <li>Бюджет менее ~180 000 руб/мес (для внешних)</li>
+          <li>Важна большая классная группа для социализации</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="max-width: 900px; margin: 20px auto 0; text-align: left;">
+      <strong>Главный вопрос перед поступлением:</strong> какова цель после 11 класса? Зарубежный вуз или топовый российский? Ответ на него определяет, насколько Сколково подходит именно вашему ребёнку.
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav">
+  <button id="prevBtn" onclick="changeSlide(-1)" disabled>←</button>
+  <div class="nav-info" id="navInfo">1 / 14</div>
+  <button id="nextBtn" onclick="changeSlide(1)">→</button>
+</div>
+
+<div class="key-hint">← → или клик для навигации</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.getElementById('dots');
+  let current = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dots.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dots.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots.children[current].classList.add('active');
+    document.getElementById('navInfo').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('slideNum').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('prevBtn').disabled = current === 0;
+    document.getElementById('nextBtn').disabled = current === slides.length - 1;
+  }
+
+  function changeSlide(dir) {
+    const next = current + dir;
+    if (next >= 0 && next < slides.length) goTo(next);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+</script>
+</body>
+</html>
