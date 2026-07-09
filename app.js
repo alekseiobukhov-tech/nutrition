@@ -15,9 +15,9 @@
 
   // A boundary comment → the screen everything after it belongs to (until the next boundary).
   function screenFor(c) {
-    if (c.indexOf("CHARTS_HEALTH:START") >= 0 ||
-        c.indexOf("CHARTS_NUTRITION:START") >= 0 ||
-        c.indexOf("CHARTS_LABS:START") >= 0) return "obzor";
+    if (c.indexOf("CHARTS_HEALTH:START") >= 0)    return "vosst";      // full charts live on detail tabs;
+    if (c.indexOf("CHARTS_NUTRITION:START") >= 0)  return "pitanie";   // Overview shows bento tiles built from them
+    if (c.indexOf("CHARTS_LABS:START") >= 0)       return "analizy";
     if (c.indexOf("КЛЮЧЕВЫЕ НАХОДКИ") >= 0)   return "obzor";
     if (c.indexOf("АНАЛИЗ ПО МЕСЯЦАМ") >= 0)   return "vosst";
     if (c.indexOf("ЕЖЕНЕДЕЛЬНЫЙ") >= 0)        return "vosst";
@@ -32,13 +32,6 @@
     if (c.indexOf("ПРИОРИТЕТНЫЙ") >= 0)        return "protokol";
     return null;
   }
-
-  // On an overview chart block, tapping its header jumps to the detail tab.
-  var JUMP = [
-    { match: "Питание сегодня",  to: "pitanie" },
-    { match: "Прогресс к цели",  to: "vosst" },
-    { match: "ключевые маркеры", to: "analizy" }
-  ];
 
   function build() {
     var container = document.querySelector(".container");
@@ -66,16 +59,39 @@
     });
     SCREENS.forEach(function (s) { container.appendChild(screens[s.id]); });
 
-    // progressive disclosure: overview chart headers link to their detail tab
-    screens.obzor.querySelectorAll(".sec-header").forEach(function (h) {
-      var t = h.textContent;
-      JUMP.forEach(function (j) {
-        if (t.indexOf(j.match) >= 0) {
-          h.style.cursor = "pointer";
-          h.insertAdjacentHTML("beforeend",
-            '<span style="margin-left:auto;color:var(--accent);font-size:20px;align-self:center">›</span>');
-          h.addEventListener("click", function () { show(j.to); });
-        }
+    // Overview bento: KPI tiles built from the .ovkpi blobs emitted by the chart generators
+    var blobs = Array.prototype.slice.call(document.querySelectorAll(".ovkpi"));
+    if (blobs.length) {
+      var tiles = blobs.map(function (b) { try { return JSON.parse(b.textContent); } catch (e) { return null; } })
+                       .filter(Boolean).sort(function (a, b) { return (a.order || 9) - (b.order || 9); });
+      var grid = document.createElement("div");
+      grid.className = "bento";
+      tiles.forEach(function (t) {
+        var tile = document.createElement("button");
+        tile.className = "tile" + (t.span === 2 ? " wide" : "") + (t.color ? " c-" + t.color : "");
+        tile.innerHTML =
+          '<div class="eyebrow">' + (t.icon || "") + " " + t.label + "</div>" +
+          '<div class="kpi">' + t.value + (t.unit ? '<small>' + t.unit + "</small>" : "") + "</div>" +
+          (t.sub ? '<div class="sub">' + t.sub + "</div>" : "") +
+          '<span class="chev">›</span>';
+        tile.addEventListener("click", function () { show(t.tab); });
+        grid.appendChild(tile);
+      });
+      screens.obzor.insertBefore(grid, screens.obzor.firstChild);
+    }
+
+    // progressive disclosure: collapse heavy tables inside detail screens
+    ["pitanie", "vosst", "analizy", "protokol"].forEach(function (sid) {
+      screens[sid].querySelectorAll(".table-wrap").forEach(function (tw) {
+        var rows = tw.querySelectorAll("tr").length;
+        if (rows < 5 || tw.closest("details")) return;
+        var det = document.createElement("details");
+        det.className = "collapse";
+        var sum = document.createElement("summary");
+        sum.textContent = "📋 Таблица · " + (rows - 1) + " строк";
+        tw.parentNode.insertBefore(det, tw);
+        det.appendChild(sum);
+        det.appendChild(tw);
       });
     });
 
