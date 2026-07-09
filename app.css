@@ -1,0 +1,41 @@
+/* Health Dashboard — app-shell styles for the tab navigation. */
+body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+
+.screen { animation: fadein .18s ease; }
+@keyframes fadein { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+.tabbar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: 2px;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+  background: rgba(15, 15, 19, 0.88);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-top: 1px solid #ffffff14;
+  z-index: 1000;
+}
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 2px;
+  background: none;
+  border: none;
+  color: #6f6f92;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab-i { font-size: 20px; line-height: 1; filter: grayscale(0.4); opacity: .7; transition: all .15s ease; }
+.tab-l { font-size: 10px; font-weight: 600; letter-spacing: .2px; }
+.tab.active { color: #22d3ee; }
+.tab.active .tab-i { filter: none; opacity: 1; transform: translateY(-1px); }
+
+/* a touch more breathing room for the sticky bottom bar on long screens */
+.screen > .section:last-child, .screen > .divider:last-child { margin-bottom: 8px; }
