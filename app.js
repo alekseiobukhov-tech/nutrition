@@ -73,7 +73,7 @@
         if (t.indexOf(j.match) >= 0) {
           h.style.cursor = "pointer";
           h.insertAdjacentHTML("beforeend",
-            '<span style="margin-left:auto;color:#06b6d4;font-size:20px;align-self:center">›</span>');
+            '<span style="margin-left:auto;color:var(--accent);font-size:20px;align-self:center">›</span>');
           h.addEventListener("click", function () { show(j.to); });
         }
       });
