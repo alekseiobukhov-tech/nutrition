@@ -18,7 +18,7 @@
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
 }
 
-body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
+body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
 
 .screen { animation: scr .18s ease; }
 @keyframes scr { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
@@ -27,7 +27,7 @@ body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
 /* ---- bottom tab bar ---- */
 .tabbar {
   position: fixed; left: 0; right: 0; bottom: 0;
-  height: 52px;
+  height: 68px;
   display: flex; justify-content: space-around; align-items: stretch;
   padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--tabbar-bg);
@@ -52,8 +52,8 @@ body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
   opacity: 0; transform: scaleX(.3);
   transition: opacity .2s ease, transform .2s cubic-bezier(.2, .8, .2, 1);
 }
-.tab-i { font-size: 20px; line-height: 1; opacity: .55; filter: grayscale(.35); transition: all .15s ease; }
-.tab-l { font-size: 10px; font-weight: 700; letter-spacing: .3px; }
+.tab-i { font-size: 24px; line-height: 1; opacity: .55; filter: grayscale(.35); transition: all .15s ease; }
+.tab-l { font-size: 11px; font-weight: 700; letter-spacing: .3px; }
 .tab.active { color: var(--accent); }
 .tab.active::before { opacity: 1; transform: scaleX(1); }
 .tab.active .tab-i { opacity: 1; transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--accent)); }
