@@ -30,7 +30,7 @@ body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
   height: 52px;
   display: flex; justify-content: space-around; align-items: stretch;
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  background: rgba(14, 14, 18, 0.72);
+  background: var(--tabbar-bg);
   backdrop-filter: saturate(160%) blur(24px);
   -webkit-backdrop-filter: saturate(160%) blur(24px);
   border-top: 1px solid var(--line);
@@ -91,7 +91,7 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
 .tile.wide { grid-column: 1 / -1; }
 .tile:active { transform: scale(.98); border-color: var(--accent); }
 .tile .eyebrow { display: flex; align-items: center; gap: 6px; font: 700 11px/1.4 inherit; letter-spacing: 1px; text-transform: uppercase; color: var(--text-2); }
-.tile .kpi { font: 800 30px/1 inherit; color: #fff; letter-spacing: -.01em; }
+.tile .kpi { font: 800 30px/1 inherit; color: var(--text-hi); letter-spacing: -.01em; }
 .tile .kpi small { font-size: 14px; font-weight: 600; color: var(--text-2); margin-left: 2px; }
 .tile .sub { font-size: 12px; color: var(--text-2); }
 .tile .chev { position: absolute; top: 14px; right: 14px; font-size: 18px; color: var(--text-3); }
@@ -100,3 +100,86 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
 .tile.c-warn .sub { color: var(--warn); }
 .tile.c-info .sub { color: var(--info); }
 .tile.c-muted .sub { color: var(--text-3); }
+
+/* ============================================================
+   THEME — dark is the default; light activates on <html data-theme="light">.
+   The pre-paint script in feedback_2026.html resolves system vs stored choice
+   and always stamps an explicit data-theme, so no @media duplication is needed.
+   Dark values below are the exact legacy hexes → the dark look is unchanged.
+   ============================================================ */
+:root{
+  --bg:#0f0f13;
+  --bg-hero-1:#0f0f13; --bg-hero-2:#1a1a2e; --bg-hero-3:#16213e;
+  --surface:#16161f;
+  --surface-2:#1a1a2e;
+  --text:#ececf2;
+  --text-hi:#ffffff;
+  --text-2:#aaaacc;
+  --text-3:#6666aa;
+  --line:#ffffff10;
+  --line-2:#ffffff14;
+  --line-soft:#ffffff0d;
+  --line-hair:#ffffff08;
+  --tabbar-bg:rgba(14,14,18,0.72);
+  --toggle-edge:#ffffff2b;
+}
+:root[data-theme="light"]{
+  --bg:#eef1f6;
+  --bg-hero-1:#e9eef7; --bg-hero-2:#dbe6f5; --bg-hero-3:#cfe0f1;
+  --surface:#ffffff;
+  --surface-2:#eef1f7;
+  --text:#242a36;
+  --text-hi:#0c1018;
+  --text-2:#4b5265;
+  --text-3:#6b7387;
+  --line:#00000012;
+  --line-2:#0000001c;
+  --line-soft:#0000000d;
+  --line-hair:#00000010;
+  --tabbar-bg:rgba(248,250,253,0.78);
+  --good:#16a34a; --bad:#e11d48; --warn:#d97706; --info:#2563eb;
+  --accent:#0891b2; --accent-dim:#0e7490;
+  --toggle-edge:#00000024;
+}
+
+/* ---- Retrofit: recolor generator-emitted inline/SVG neutrals in light mode ----
+   These blocks live between HTML markers and are re-emitted by the Python fleet
+   with baked-in dark hexes; we override by value so no generator change is needed.
+   Semantic hues (#e94560 red / #22c55e green / #f59e0b amber …) are left alone —
+   they read on both themes. */
+:root[data-theme="light"] [style*="color:#fff"]{color:var(--text-hi)!important}
+:root[data-theme="light"] [style*="color:#6666aa"]{color:var(--text-3)!important}
+:root[data-theme="light"] [style*="color:#aaaacc"]{color:var(--text-2)!important}
+:root[data-theme="light"] [style*="color:#8888bb"]{color:var(--text-3)!important}
+:root[data-theme="light"] [style*="color:#8888aa"]{color:var(--text-3)!important}
+:root[data-theme="light"] [style*="color:#ccccdd"]{color:var(--text-2)!important}
+/* inline note-box surfaces/borders (e.g. background:#1a1a2e; border:1px solid #ffffff0d) */
+:root[data-theme="light"] [style*="background:#1a1a2e"]{background:var(--surface-2)!important}
+:root[data-theme="light"] [style*="solid #ffffff0d"]{border-color:var(--line-soft)!important}
+
+/* SVG chart chrome — fill/stroke are presentation attributes (lowest priority),
+   so a plain selector overrides them; no !important needed. */
+:root[data-theme="light"] svg text[fill="#6666aa"]{fill:var(--text-3)}
+:root[data-theme="light"] svg [fill="#fff"],
+:root[data-theme="light"] svg [fill="#ffffff"]{fill:#334155}
+:root[data-theme="light"] svg [stroke="#ffffff10"],
+:root[data-theme="light"] svg [stroke="#ffffff14"],
+:root[data-theme="light"] svg [stroke="#ffffff18"]{stroke:#00000018}
+:root[data-theme="light"] svg [fill="#ffffff10"],
+:root[data-theme="light"] svg [fill="#ffffff12"],
+:root[data-theme="light"] svg [fill="#ffffff14"]{fill:#0000000d}
+
+/* ---- Floating theme toggle ---- */
+.theme-toggle{
+  position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); right:14px;
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; line-height:1; cursor:pointer;
+  background:var(--surface); color:var(--text);
+  border:1px solid var(--toggle-edge);
+  box-shadow:0 3px 14px #0000004a, 0 0 0 1px var(--toggle-edge);
+  -webkit-backdrop-filter:saturate(160%) blur(10px); backdrop-filter:saturate(160%) blur(10px);
+  z-index:1100; user-select:none; -webkit-tap-highlight-color:transparent;
+  transition:transform .15s ease, background .2s ease, border-color .2s ease;
+}
+.theme-toggle:active{transform:scale(0.9)}

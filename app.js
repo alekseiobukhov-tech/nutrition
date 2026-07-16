@@ -128,3 +128,52 @@
     build();
   }
 })();
+
+/* ---- Theme toggle ---------------------------------------------------------
+   The pre-paint <script> in the HTML has already stamped html[data-theme].
+   Here we mount the floating button, persist the manual choice, keep the
+   browser chrome (theme-color) in sync, and follow OS changes until the user
+   picks a side explicitly. Button lives on <body>, outside .container, so the
+   screen-builder never sweeps it into a tab. */
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var META = { dark: "#0891b2", light: "#e9eef7" };
+  function current() { return root.getAttribute("data-theme") === "light" ? "light" : "dark"; }
+  function stored() { try { return localStorage.getItem("theme"); } catch (e) { return null; } }
+  function paintMeta(t) {
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute("content", t === "light" ? META.light : META.dark);
+  }
+  var btn = null;
+  function apply(t) {
+    root.setAttribute("data-theme", t);
+    paintMeta(t);
+    if (btn) btn.textContent = t === "light" ? "☀️" : "🌙";
+  }
+  function mount() {
+    if (document.querySelector(".theme-toggle")) return;
+    btn = document.createElement("button");
+    btn.className = "theme-toggle";
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Переключить тему");
+    btn.textContent = current() === "light" ? "☀️" : "🌙";
+    btn.addEventListener("click", function () {
+      var t = current() === "light" ? "dark" : "light";
+      try { localStorage.setItem("theme", t); } catch (e) {}
+      apply(t);
+    });
+    document.body.appendChild(btn);
+    paintMeta(current());
+  }
+  try {
+    var mq = window.matchMedia("(prefers-color-scheme: light)");
+    var onSys = function (e) {
+      var s = stored();
+      if (s !== "light" && s !== "dark") apply(e.matches ? "light" : "dark");
+    };
+    mq.addEventListener ? mq.addEventListener("change", onSys) : mq.addListener(onSys);
+  } catch (e) {}
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+})();
