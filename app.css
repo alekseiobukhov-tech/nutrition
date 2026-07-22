@@ -151,6 +151,41 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
+/* Горизонтальный скролл таблиц был без единого признака: на 390px таблица шире экрана
+   (min-width 520), и что её можно листать, приходилось угадывать. Классический приём на
+   background-attachment: тени у краёв «прилипают» к рамке, градиенты-перекрытия едут вместе с
+   содержимым и прячут тень, когда листать больше некуда. Без JS. */
+/* Удвоенный класс — не украшение: app.css подключён ДО инлайнового <style> страницы,
+   и её собственное .table-wrap{background:var(--surface)} перебивало бы это правило.
+   Специфичность 0,2,0 против 0,1,0 решает вопрос без !important. */
+.table-wrap.table-wrap{
+  background:
+    linear-gradient(to right, var(--surface) 30%, transparent),
+    linear-gradient(to left,  var(--surface) 30%, transparent),
+    radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.28), transparent),
+    radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.28), transparent);
+  background-position: 0 0, 100% 0, 0 0, 100% 0;
+  background-repeat: no-repeat;
+  background-size: 34px 100%, 34px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+
+/* Полоса честности: приложение показывает прошлое, и обязано это признавать.
+   Липнет к верху, не перекрывает контент (сдвигает его), уходит сама, когда данные свежие. */
+.freshness{
+  position:sticky; top:0; z-index:1100;
+  display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+  padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;
+  font-size:13px; font-weight:600; line-height:1.35; text-align:center;
+}
+.freshness.off  {background:#e9456020; color:var(--bad);  border-bottom:1px solid #e9456040}
+.freshness.stale{background:#f59e0b20; color:var(--warn); border-bottom:1px solid #f59e0b40}
+.freshness-btn{
+  font:inherit; padding:4px 12px; border-radius:999px; cursor:pointer;
+  background:var(--surface); color:var(--text); border:1px solid var(--line-2);
+  min-height:32px;
+}
+
 /* ---- Retrofit: recolor generator-emitted inline/SVG neutrals in light mode ----
    These blocks live between HTML markers and are re-emitted by the Python fleet
    with baked-in dark hexes; we override by value so no generator change is needed.

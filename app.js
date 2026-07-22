@@ -37,6 +37,52 @@
     return null;
   }
 
+  /* ---- Честность данных ---------------------------------------------------
+     Приложение по своей природе показывает прошлое: в офлайне service worker отдаёт кэш, а
+     онлайн страница ровно так же свежа, как последний прогон генератора. 21–22.07 ежечасная
+     джоба Mac лежала сутки, и приложение всё это время уверенно показывало вчерашние числа —
+     ни одного признака, что это вчерашние. Полоса закрывает оба случая одним правилом: важен
+     ВОЗРАСТ данных, а не причина.
+
+     Порог 12 часов, а не час: ночью Mac спит и утренний прогон в 08:44 — это законные ~9 часов
+     без обновления. Сторож снапшота на сервере держит суточный порог по той же причине. */
+  var STALE_H = 12;
+
+  function generatedAt() {
+    var m = document.querySelector('meta[name="generated"]');
+    if (!m) return null;
+    var d = new Date(m.getAttribute("content"));
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  function freshnessBar() {
+    var when = generatedAt();
+    var bar = document.getElementById("freshness");
+    if (!bar) {
+      bar = document.createElement("div");
+      bar.id = "freshness";
+      bar.className = "freshness";
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
+    var offline = navigator.onLine === false;
+    var ageH = when ? (Date.now() - when.getTime()) / 3600000 : null;
+    var stale = ageH !== null && ageH > STALE_H;
+    if (!offline && !stale) { bar.style.display = "none"; return; }
+
+    var stamp = when
+      ? when.toLocaleString("ru-RU", { day: "2-digit", month: "2-digit",
+                                       hour: "2-digit", minute: "2-digit" })
+      : "неизвестно когда";
+    bar.className = "freshness" + (offline ? " off" : " stale");
+    bar.innerHTML = (offline ? "📴 Офлайн · данные на " : "⏳ Данные не обновлялись · собраны ")
+      + stamp + (ageH !== null ? " (" + Math.round(ageH) + " ч назад)" : "")
+      + '<button class="freshness-btn" type="button">Обновить</button>';
+    bar.style.display = "";
+    bar.querySelector(".freshness-btn").addEventListener("click", function () {
+      location.reload();
+    });
+  }
+
   function build() {
     var container = document.querySelector(".container");
     if (!container || container.dataset.screensReady) return;
@@ -99,6 +145,9 @@
         if (rows < 5 || tw.closest("details")) return;
         var det = document.createElement("details");
         det.className = "collapse";
+        // Первая таблица экрана — текущий период, ради неё вкладку и открывают: прятать её за
+        // лишний тап значит прятать содержимое вкладки. История остаётся свёрнутой.
+        if (!screens[sid].querySelector("details.collapse")) det.open = true;
         var sum = document.createElement("summary");
         sum.textContent = "📋 Таблица · " + (rows - 1) + " строк";
         tw.parentNode.insertBefore(det, tw);
@@ -143,10 +192,12 @@
     show("obzor");
   }
 
+  function start() { build(); freshnessBar(); }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", build);
+    document.addEventListener("DOMContentLoaded", start);
   } else {
-    build();
+    start();
   }
 })();
 
@@ -161,6 +212,27 @@
   var root = document.documentElement;
   var META = { dark: "#0891b2", light: "#e9eef7" };
   function current() { return root.getAttribute("data-theme") === "light" ? "light" : "dark"; }
+  /* Новая версия в standalone приходит молча: service worker делает skipWaiting и подменяет
+     страницу при следующем открытии. Адресной строки нет, «потянуть для обновления» тоже, —
+     значит о смене версии надо сказать словами и дать кнопку. */
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("controllerchange", function () {
+      var bar = document.getElementById("freshness") || document.createElement("div");
+      bar.id = "freshness";
+      bar.className = "freshness stale";
+      bar.innerHTML = "🆕 Загружена новая версия приложения"
+        + '<button class="freshness-btn" type="button">Перезагрузить</button>';
+      if (!bar.parentNode) document.body.insertBefore(bar, document.body.firstChild);
+      bar.style.display = "";
+      bar.querySelector(".freshness-btn").addEventListener("click", function () {
+        location.reload();
+      });
+    });
+  }
+
+  window.addEventListener("online", freshnessBar);
+  window.addEventListener("offline", freshnessBar);
+
   function stored() { try { return localStorage.getItem("theme"); } catch (e) { return null; } }
   function paintMeta(t) {
     var m = document.querySelector('meta[name="theme-color"]');
