@@ -127,9 +127,11 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
 
 <!-- HERO -->
 <div class="hero">
-  <div class="badge">Обратная связь · Январь–Июнь 2026</div>
+  <!-- HERO_SUB:START -->
+  <div class="badge">Обратная связь · данные по 22 июля 2026</div>
   <h1>Алексей Обухов — Аналитика</h1>
-  <p class="hero-sub">На основе 169 дней данных Apple Health + Suunto + протокол препаратов</p>
+  <p class="hero-sub">На основе 36 дней Apple Health + Suunto · протокол препаратов и дневник питания</p>
+  <!-- HERO_SUB:END -->
 
   <div class="score-grid">
     <!-- SCORECARDS:START -->
@@ -317,30 +319,31 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
     </div>
   </div>
 
-  <div class="alert alert-yellow">
-    <div class="alert-icon">⚠️</div>
-    <div class="alert-body">
-      <strong>Вес: откат в мае после прогресса в апреле</strong>
-      <p>Лучший месяц — апрель: 90.1 кг, 21.2% жира. Май: откат до 91.5 кг, 23.3% жира. По часам сон в мае был нормальным (8.1 ч, менее 7ч — 5 ночей из 31), так что прежняя «сонная» гипотеза снята пересчётом 16.07. Причина отката не установлена — дневника питания в мае ещё не было.</p>
-    </div>
-  </div>
-
-  <div class="alert alert-yellow">
-    <div class="alert-icon">📊</div>
-    <div class="alert-body">
-      <strong>Семаглутид даёт меньший эффект чем ожидалось</strong>
-      <p>За 6 месяцев чистое снижение веса ~1.5 кг (с пика 93.3 кг в феврале до 91.4 кг сейчас). Для семаглутида 0.5 мг ожидается 5–8% снижения за этот период (~4.5–7 кг). Гипотеза о недосыпании снята пересчётом 16.07 (сон 8.4 ч по часам) — причина слабого эффекта не установлена; вопрос о дозе — к врачу (см. Протокол).</p>
-    </div>
-  </div>
-
-  <div class="alert alert-green">
-    <div class="alert-icon">✅</div>
-    <div class="alert-body">
-      <strong>Что работает хорошо</strong>
-      <p>Активность на высоком уровне — 11–13 тыс. шагов/день стабильно. Пульс снизился с 80 (январь) до 73 в марте, что говорит об адаптации. Ноотропный стек грамотный. Апрель показал, что протокол работает когда сон нормализован — это доказательство потенциала.</p>
-    </div>
-  </div>
-</div>
+  <!-- FINDINGS:START -->
+  <ul class="rec-list">
+    <li class="rec-item">
+      <div class="rec-icon">⚖️</div>
+      <div class="rec-body">
+        <span class="rec-tag" style="background:#22c55e20;color:#22c55e;border:1px solid #22c55e40">Вес</span>
+        Сейчас <strong>91.9 кг</strong>, пик за период — 93.0 кг (−1.1 кг). Цель 82–85 кг, до неё 6.9 кг. Самый лёгкий месяц на записи — Апр 2026 (90.1 кг).
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">😴</div>
+      <div class="rec-body">
+        <span class="rec-tag" style="background:#22c55e20;color:#22c55e;border:1px solid #22c55e40">Сон</span>
+        <strong>7.9 ч</strong> в среднем за 21 ночь, ниже 7 ч — 5. Цель 7.5 ч.
+      </div>
+    </li>
+    <li class="rec-item">
+      <div class="rec-icon">🚶</div>
+      <div class="rec-body">
+        <span class="rec-tag" style="background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40">Активность</span>
+        <strong>9 395</strong> шагов в день за 21 день (цель 10 000).
+      </div>
+    </li>
+  </ul>
+  <!-- FINDINGS:END -->
 
 <div class="divider"></div>
 
@@ -411,12 +414,9 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
       </tbody>
     </table>
   </div>
-  <div style="margin-top:14px;background:#1a1a2e;border-radius:12px;padding:16px 20px;font-size:13px;color:#aaaacc;border:1px solid #ffffff0d">
-    <strong style="color:#fff">Цвета — светофор по целям плана:</strong> сон ≥7.5 ч, глубокий сон ≥0.8 ч, шаги ≥11 000/день →
-    <span style="color:#22c55e">зелёный</span>, ниже — <span style="color:#f59e0b">жёлтый</span> /
-    <span style="color:#e94560">красный</span>.
-    Пометка «N/7 сна» означает, что часы фиксировали сон не все дни недели — трекинг сна нужно довести до 7/7 для корректной картины.
-  </div>
+  <!-- WEEKLY_LEGEND:START -->
+  <div class="small" style="color:#6666aa">Цвета — светофор по целям: сон ≥7.5 ч, глубокий сон ≥0.8 ч, шаги ≥10 000 в день → зелёный, ниже — жёлтый или красный. Пометка «N/7 сна» означает, что часы фиксировали сон не все дни недели.</div>
+  <!-- WEEKLY_LEGEND:END -->
 </div>
 
 <div class="divider"></div>
@@ -489,33 +489,35 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
 
 <div class="divider"></div>
 
-<!-- 3. СОН — ПРИОРИТЕТ #1 -->
+<!-- 3. СОН -->
 <div class="section">
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">3</div>
     <div>
-      <div class="sec-title">Сон — приоритет №1</div>
-      <div class="sec-sub">Главная точка роста по всем показателям</div>
+      <div class="sec-title">Сон</div>
+      <div class="sec-sub">Восстановление, на котором стоят вес и нагрузка</div>
     </div>
   </div>
 
+  <!-- VITALS:START -->
   <div class="cards cards-3" style="margin-bottom:24px">
-    <div class="card card-green">
+    <div class="card">
       <h3>Среднее время сна</h3>
-      <div class="big" style="color:#22c55e">8.4 ч</div>
-      <div class="small">По часам Suunto, 177 ночей янв–июн · норма для 45+ со спортом 5×/нед: <strong style="color:#fff">8–9 ч</strong> ✓</div>
+      <div class="big" style="color:#22c55e">7.9 ч</div>
+      <div class="small">За 21 последнюю ночь · цель <strong style="color:#fff">7.5 ч</strong></div>
     </div>
-    <div class="card card-green">
-      <h3>Глубокий сон (Deep)</h3>
-      <div class="big" style="color:#22c55e">1.55 ч</div>
-      <div class="small">Норма: <strong style="color:#fff">1.5–2 ч</strong> ✓ — фаза гормона роста и восстановления мышц в порядке</div>
+    <div class="card">
+      <h3>Глубокий сон</h3>
+      <div class="big" style="color:#22c55e">1.50 ч</div>
+      <div class="small">Цель <strong style="color:#fff">≥0.8 ч</strong> — фаза гормона роста и восстановления мышц</div>
     </div>
-    <div class="card card-green">
-      <h3>Ночные пробуждения</h3>
-      <div class="big" style="color:#22c55e">~4 мин</div>
-      <div class="small">Медиана ~1 мин, максимум за полгода 1.2 ч<br>Норма: <strong style="color:#fff">до 30 мин</strong> ✓</div>
+    <div class="card">
+      <h3>Ночей ниже 7 ч</h3>
+      <div class="big" style="color:#f59e0b">5 из 21</div>
+      <div class="small">Счёт по тому же окну, что график выше. Фрагментацию и пробуждения отдельно ведёт детектив сна</div>
     </div>
   </div>
+  <!-- VITALS:END -->
 
   <ul class="rec-list">
     <li class="rec-item">
@@ -523,15 +525,15 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
       <div class="rec-body">
         <span class="rec-tag tag-green">Снято 16.07</span>
         <strong>Апноэ-маркер снят пересчётом по часам</strong><br>
-        Основание («2+ часа ночных пробуждений») оказалось артефактом старого экспорта — по часам пробуждения ~4 мин/ночь. Детектив сна продолжает автоматически следить за фрагментацией и расхождениями; если флаг вернётся — тогда полисомнография.
+        Основание («2+ часа ночных пробуждений») оказалось артефактом старого экспорта — по часам пробуждения ~4 мин/ночь. Детектив сна продолжает следить за фрагментацией автоматически.
       </div>
     </li>
     <li class="rec-item">
       <div class="rec-icon">⏰</div>
       <div class="rec-body">
         <span class="rec-tag tag-yellow">Важно</span>
-        <strong>Ноопепт — не позже 13:00</strong><br>
-        Ноопепт увеличивает нейропластичность и возбудимость ЦНС. Приём после обеда прямо нарушает засыпание и фрагментирует сон. Переноси весь ноотропный стек на утро с завтраком.
+        <strong>Ноопепт — не позже 10:00</strong><br>
+        Ноопепт увеличивает нейропластичность и возбудимость ЦНС. Приём позже утра прямо нарушает засыпание и фрагментирует сон. Переноси весь ноотропный стек на утро с завтраком.
       </div>
     </li>
     <li class="rec-item">
@@ -572,14 +574,15 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
       <div class="sec-sub">Теннис + Хоккей · 5×/нед · коррекция под данные</div>
     </div>
   </div>
-
-  <div class="alert alert-yellow">
+  <!-- TRAINING_STATE:START -->
+  <div class="alert alert-green">
     <div class="alert-icon">⚡</div>
     <div class="alert-body">
-      <strong>5 тренировок в неделю — сон их поддерживает (8.4 ч)</strong>
-      <p>Пересчёт 16.07 снял тезис о перегрузке из-за недосыпа. Остаётся наблюдение по пульсу: средний 79–81 уд/мин по всем замерам (включая покой) при минимальном 49. Нагрузку теперь измеряет TSS с часов (пилот) — по нему и будем судить о восстановлении, а не по устаревшей сонной гипотезе.</p>
+      <strong>Нагрузка и восстановление — что показывают часы</strong>
+      <p>За последние 4 недели — <strong>16</strong> сессий (~4.0 в неделю); суммарный TSS 1685, средний за сессию 105; сон в этот период 7.9 ч при цели 7.5. Разбор нагрузки (ACWR, готовность, дрейф пульса) ведёт тренер-аналитик и цитирует его вечерний бриф.</p>
     </div>
   </div>
+  <!-- TRAINING_STATE:END -->
 
   <ul class="rec-list">
     <li class="rec-item">
@@ -645,7 +648,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
     </div>
     <div class="card card-green">
       <h3>Приоритет #1</h3>
-      <div class="big" style="color:#22c55e">175 г</div>
+      <div class="big" style="color:#22c55e">180 г</div>
       <div class="small">Белка в день — каждый день, независимо от аппетита. Это важнее подсчёта калорий. Используй протеин как страховку.</div>
     </div>
     <div class="card card-blue">
@@ -709,7 +712,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
       <div class="rec-body">
         <span class="rec-tag tag-red">Обсудить с врачом</span>
         <strong>Эффективность семаглутида ниже ожидаемой — возможна коррекция дозы</strong><br>
-        За 6 месяцев: –1.5 кг при ожидаемых –4.5–7 кг. Гипотеза «недосыпание блокирует GLP-1» снята пересчётом 16.07 — сон в норме (8.4 ч). Вопрос об увеличении дозы или частоты введения — к врачу, на основании динамики веса и дневника питания.
+        За 6 месяцев: –1.5 кг при ожидаемых –4.5–7 кг. Гипотеза «недосыпание блокирует GLP-1» снята пересчётом 16.07 (по 177 ночам янв–июн сон был в норме). Вопрос об увеличении дозы или частоты введения — к врачу, на основании динамики веса и дневника питания.
       </div>
     </li>
     <li class="rec-item">
@@ -1042,30 +1045,34 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
       <div class="sec-sub">Реалистичные цели на 3–4 месяца</div>
     </div>
   </div>
+  <!-- FORECAST:START -->
   <div class="cards cards-3">
-    <div class="card card-green">
+    <div class="card">
       <h3>Вес</h3>
-      <div class="big" style="color:#22c55e">85–87 кг</div>
-      <div class="small">К октябрю 2026 при нормализации сна + семаглутид + силовые. Дефицит 0.3–0.5 кг/нед без потери мышц.</div>
+      <div class="big" style="color:#22c55e">82–85 кг</div>
+      <div class="small">Сейчас 91.9 кг — до верхней границы 6.9 кг при темпе 0.3–0.5 кг/нед.</div>
     </div>
-    <div class="card card-blue">
+    <div class="card">
+      <h3>Сон</h3>
+      <div class="big" style="color:#a78bfa">7.5+ ч</div>
+      <div class="small">Лучший месяц на записи — Апр 2026: 8.8 ч в среднем. Условия того месяца и есть цель.</div>
+    </div>
+    <div class="card">
       <h3>% Жира</h3>
       <div class="big" style="color:#60a5fa">18–20%</div>
-      <div class="small">Реально при сне 8 ч + силовые (текущий замер — на вкладке «Обзор»). Цель 15–18% — горизонт конец 2026 / начало 2027.</div>
-    </div>
-    <div class="card card-purple">
-      <h3>Сон</h3>
-      <div class="big" style="color:#a78bfa">7.5–8 ч</div>
-      <div class="small">Достижимо при: перенос ноотропов на утро + магний + режим 22:30. Апрель показал потенциал — 6.9ч уже было.</div>
+      <div class="small">В Апр 2026 было 21.2%. Текущий замер — на вкладке «Обзор».</div>
     </div>
   </div>
+  <!-- FORECAST:END -->
 </div>
 
 </div>
 
 <footer>
-  Aleksei Obukhov · Аналитика на основе 169 дней Apple Health + Suunto · Июнь 2026<br>
-  91 кг / 178 см / 45 лет · Теннис + Хоккей 5×/нед · Semavic Next + Овитрель + Ноопепт + Альфа-GPC + Ежовик
+  <!-- FOOTER:START -->
+  <div class="small">Aleksei Obukhov · 36 дней данных (17.06–22.07.2026) · Apple Health + Suunto</div>
+  <div class="small">91.9 кг · 178 см / 45 лет · Теннис + Хоккей 5×/нед</div>
+  <!-- FOOTER:END -->
 </footer>
 <script>
 if ('serviceWorker' in navigator) {
