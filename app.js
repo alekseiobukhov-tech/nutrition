@@ -102,6 +102,9 @@
     // bottom tab bar
     var nav = document.createElement("nav");
     nav.className = "tabbar";
+    // Вкладки — это навигация по одному документу, поэтому aria-current="page", а не роль tab:
+    // роль tablist обязывает к клавиатурной модели со стрелками, которой здесь нет.
+    nav.setAttribute("aria-label", "Разделы отчёта");
     SCREENS.forEach(function (s) {
       var b = document.createElement("button");
       b.className = "tab";
@@ -116,7 +119,13 @@
       SCREENS.forEach(function (s) {
         screens[s.id].style.display = s.id === id ? "block" : "none";
         var tab = nav.querySelector('[data-screen="' + s.id + '"]');
-        if (tab) tab.classList.toggle("active", s.id === id);
+        if (tab) {
+          tab.classList.toggle("active", s.id === id);
+          // состояние «где я» не должно жить только в цвете: без этого скринридер
+          // не отличает активную вкладку от остальных (WCAG 4.1.2)
+          if (s.id === id) { tab.setAttribute("aria-current", "page"); }
+          else { tab.removeAttribute("aria-current"); }
+        }
       });
       var hero = document.querySelector(".hero");
       if (hero) hero.style.display = id === "obzor" ? "" : "none";

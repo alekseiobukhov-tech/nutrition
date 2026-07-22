@@ -209,7 +209,7 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
 /* ---- Floating theme toggle ---- */
 .theme-toggle{
   position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); right:14px;
-  width:40px; height:40px; border-radius:50%;
+  width:44px; height:44px; border-radius:50%;   /* HIG: минимальная зона нажатия */
   display:flex; align-items:center; justify-content:center;
   font-size:18px; line-height:1; cursor:pointer;
   background:var(--surface); color:var(--text);
