@@ -170,6 +170,19 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
   background-attachment: local, local, scroll, scroll;
 }
 
+/* Шапка-документ («Обратная связь · Алексей Обухов — Аналитика · на основе N дней») занимала
+   163 px = 21% первого экрана телефона и не несла информации для единственного пользователя:
+   собственное имя — константа, дата дублируется полосой свежести, источники — футером.
+   Решение Алексея 22.07: одна строка — время сборки слева, кнопка темы справа. */
+.hero.hero{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:calc(6px + env(safe-area-inset-top,0px)) 14px 6px;
+  min-height:44px; text-align:left; background:var(--surface); 
+}
+.appbar-when{font-size:13px; font-weight:600; color:var(--text-3); letter-spacing:.2px}
+/* кнопка темы переезжает в полосу: перестаёт висеть поверх контента */
+.hero .theme-toggle{position:static; top:auto; right:auto; flex:0 0 auto}
+
 /* Полоса честности: приложение показывает прошлое, и обязано это признавать.
    Липнет к верху, не перекрывает контент (сдвигает его), уходит сама, когда данные свежие. */
 .freshness{
