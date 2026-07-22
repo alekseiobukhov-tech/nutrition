@@ -82,6 +82,14 @@
         grid.appendChild(tile);
       });
       screens.obzor.insertBefore(grid, screens.obzor.firstChild);
+
+      // Ряд оценок физически лежит в .hero, то есть НАД плитками и вне вкладок. На телефоне это
+      // давало 627px шапки при 757px экрана: операционные плитки — то, ради чего открывают утром —
+      // начинались на 664px, за сгибом. Переносим ряд под плитки и внутрь «Обзора»: сначала
+      // «что сейчас», потом «как в целом». Маркеры региона остаются в файле на прежнем месте,
+      // генератор пишет туда же — переезжает только отрисованный узел.
+      var grades = document.querySelector(".hero .score-grid");
+      if (grades) { grid.parentNode.insertBefore(grades, grid.nextSibling); }
     }
 
     // progressive disclosure: collapse heavy tables inside detail screens
