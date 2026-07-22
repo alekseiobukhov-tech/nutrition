@@ -115,13 +115,16 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
   --text:#ececf2;
   --text-hi:#ffffff;
   --text-2:#aaaacc;
-  --text-3:#6666aa;
+  --text-3:#8a8ac4;   /* было #6666aa — 3.46:1 на карточке, ниже AA */
   --line:#ffffff10;
   --line-2:#ffffff14;
   --line-soft:#ffffff0d;
   --line-hair:#ffffff08;
   --tabbar-bg:rgba(14,14,18,0.72);
   --toggle-edge:#ffffff2b;
+  /* семантика: в тёмной теме легаси-значения проходят AA (4.69–8.37) */
+  --good:#22c55e; --warn:#f59e0b; --bad:#e94560; --info:#3b82f6;
+  --accent:#22d3ee; --violet:#a78bfa;
 }
 :root[data-theme="light"]{
   --bg:#eef1f6;
@@ -131,14 +134,15 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
   --text:#242a36;
   --text-hi:#0c1018;
   --text-2:#4b5265;
-  --text-3:#6b7387;
+  --text-3:#5f6678;   /* было #6b7387 — 4.19:1 на фоне страницы */
   --line:#00000012;
   --line-2:#0000001c;
   --line-soft:#0000000d;
   --line-hair:#00000010;
   --tabbar-bg:rgba(248,250,253,0.78);
-  --good:#16a34a; --bad:#e11d48; --warn:#d97706; --info:#2563eb;
-  --accent:#0891b2; --accent-dim:#0e7490;
+  /* проверено на обоих светлых фонах (#fff и #eef1f6), оба ≥4.5:1 */
+  --good:#137a3a; --bad:#be123c; --warn:#8a5a00; --info:#1d4ed8;
+  --accent:#155e75; --accent-dim:#0e7490; --violet:#6d28d9;
   --toggle-edge:#00000024;
 }
 
@@ -147,12 +151,40 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
    with baked-in dark hexes; we override by value so no generator change is needed.
    Semantic hues (#e94560 red / #22c55e green / #f59e0b amber …) are left alone —
    they read on both themes. */
+/* Цвет текста, который генераторы печатают литералом. Пока они не перешли на токены
+   (этап 6 плана), тема правит их ПО ЗНАЧЕНИЮ — это же лечит и уже напечатанные строки
+   недельной таблицы, которые append-only и не перерисовываются.
+   Карта и её обоснование — contrast.py THEME_MAP; contrast.py --css проверяет, что здесь
+   реализовано всё, что карта обещает. Числа в комментариях — было → стало. */
+
+/* ── светлая тема ─────────────────────────────────────────────────────────── */
+/* нейтрали */
 :root[data-theme="light"] [style*="color:#fff"]{color:var(--text-hi)!important}
-:root[data-theme="light"] [style*="color:#6666aa"]{color:var(--text-3)!important}
+:root[data-theme="light"] [style*="color:#e6e6e6"]{color:var(--text)!important}      /* 1.25 → 12.7 */
+:root[data-theme="light"] [style*="color:#ccccdd"]{color:var(--text-2)!important}
 :root[data-theme="light"] [style*="color:#aaaacc"]{color:var(--text-2)!important}
+:root[data-theme="light"] [style*="color:#6666aa"]{color:var(--text-3)!important}
 :root[data-theme="light"] [style*="color:#8888bb"]{color:var(--text-3)!important}
 :root[data-theme="light"] [style*="color:#8888aa"]{color:var(--text-3)!important}
-:root[data-theme="light"] [style*="color:#ccccdd"]{color:var(--text-2)!important}
+/* семантика — светофор, которым читаются таблицы */
+:root[data-theme="light"] [style*="color:#22c55e"]{color:var(--good)!important}      /* 2.28 → 5.42 */
+:root[data-theme="light"] [style*="color:#f59e0b"]{color:var(--warn)!important}      /* 2.15 → 5.93 */
+:root[data-theme="light"] [style*="color:#fbbf24"]{color:var(--warn)!important}      /* 1.67 → 5.93 */
+:root[data-theme="light"] [style*="color:#e94560"]{color:var(--bad)!important}       /* 3.83 → 6.29 */
+:root[data-theme="light"] [style*="color:#3b82f6"]{color:var(--info)!important}      /* 3.68 → 6.70 */
+:root[data-theme="light"] [style*="color:#60a5fa"]{color:var(--info)!important}      /* 2.54 → 6.70 */
+:root[data-theme="light"] [style*="color:#22d3ee"]{color:var(--accent)!important}    /* 1.81 → 7.27 */
+:root[data-theme="light"] [style*="color:#06b6d4"]{color:var(--accent)!important}
+:root[data-theme="light"] [style*="color:#0891b2"]{color:var(--accent)!important}
+:root[data-theme="light"] [style*="color:#a78bfa"]{color:var(--violet)!important}    /* 2.72 → 7.10 */
+
+/* ── тёмная тема ──────────────────────────────────────────────────────────── */
+/* Единственный провал тёмной темы — цвет подписей, а им набраны все честные оговорки
+   («из первичного анализа», «месяц идёт, по 22.07»). */
+:root[data-theme="dark"] [style*="color:#6666aa"]{color:var(--text-3)!important}     /* 3.46 → 5.57 */
+:root[data-theme="dark"] [style*="color:#8888aa"]{color:var(--text-3)!important}
+:root[data-theme="dark"] [style*="color:#8888bb"]{color:var(--text-3)!important}
+
 /* inline note-box surfaces/borders (e.g. background:#1a1a2e; border:1px solid #ffffff0d) */
 :root[data-theme="light"] [style*="background:#1a1a2e"]{background:var(--surface-2)!important}
 :root[data-theme="light"] [style*="solid #ffffff0d"]{border-color:var(--line-soft)!important}
