@@ -24,20 +24,20 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
 .hero{background:linear-gradient(135deg,var(--bg-hero-1) 0%,var(--bg-hero-2) 60%,var(--bg-hero-3) 100%);padding:60px 24px 48px;text-align:center;border-bottom:1px solid var(--line)}
-.badge{display:inline-block;padding:5px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;background:#e9456020;border:1px solid #e9456050;color:#e94560}
+.badge{display:inline-block;padding:5px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;background:#e9456020;border:1px solid #e9456050;color:#e94560}
 h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:var(--text-hi);margin-bottom:8px}
 .hero-sub{font-size:14px;color:var(--text-3);margin-bottom:40px}
 .score-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:900px;margin:0 auto}
 .score-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 20px;text-align:center;min-width:130px}
 .score-card .grade{font-size:32px;font-weight:800;display:block;margin-bottom:4px}
-.score-card .area{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px}
-.score-card .delta{font-size:11px;margin-top:4px}
+.score-card .area{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px}
+.score-card .delta{font-size:13px;margin-top:4px}
 
 .container{max-width:1000px;margin:0 auto;padding:52px 20px}
 .section{margin-bottom:48px}
 .sec-header{display:flex;align-items:center;gap:14px;margin-bottom:28px}
 .sec-num{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
-.sec-title{font-size:20px;font-weight:700;color:var(--text-hi)}
+.sec-title{margin:0;font-weight:800;font-size:20px;font-weight:700;color:var(--text-hi)}
 .sec-sub{font-size:12px;color:var(--text-3);margin-top:2px}
 
 /* Cards */
@@ -50,13 +50,13 @@ h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:var(--text-hi);margin-bo
 .card-blue  {border-color:#3b82f630;background:#3b82f608}
 .card-yellow{border-color:#f59e0b30;background:#f59e0b08}
 .card-purple{border-color:#7c3aed30;background:#7c3aed08}
-.card h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);margin-bottom:10px;font-weight:700}
+.card h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);margin-bottom:10px;font-weight:700}
 .card .big{font-size:32px;font-weight:800;color:var(--text-hi);line-height:1}
 .card .small{font-size:13px;color:var(--text-2);margin-top:8px;line-height:1.6}
 
 /* Data table */
-.data-table{width:100%;border-collapse:collapse;font-size:13px}
-.data-table th{background:var(--surface-2);color:var(--text-3);font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:10px 14px;text-align:left}
+.data-table{width:100%;border-collapse:collapse;font-size:14px}
+.data-table th{background:var(--surface-2);color:var(--text-3);font-size:12px;text-transform:uppercase;letter-spacing:1px;padding:10px 14px;text-align:left}
 .data-table td{padding:10px 14px;border-bottom:1px solid var(--line-hair);color:var(--text-2)}
 .data-table tr:last-child td{border:none}
 .table-wrap{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -76,7 +76,7 @@ h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:var(--text-hi);margin-bo
 .rec-icon{font-size:20px;flex-shrink:0}
 .rec-body{font-size:14px;color:var(--text-2);line-height:1.6}
 .rec-body strong{color:var(--text-hi)}
-.rec-tag{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-right:6px}
+.rec-tag{display:inline-block;padding:2px 9px;border-radius:10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-right:6px}
 .tag-red   {background:#e9456020;color:#e94560;border:1px solid #e9456040}
 .tag-yellow{background:#f59e0b20;color:#fbbf24;border:1px solid #f59e0b40}
 .tag-green {background:#22c55e20;color:#22c55e;border:1px solid #22c55e40}
@@ -88,8 +88,8 @@ h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:var(--text-hi);margin-bo
 .prio-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
 .prio-text{flex:1;font-size:14px;color:var(--text-2)}
 .prio-text strong{color:var(--text-hi);display:block;margin-bottom:2px}
-.prio-text span{font-size:12px;color:var(--text-3)}
-.prio-impact{font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px}
+.prio-text span{font-size:13px;color:var(--text-3)}
+.prio-impact{font-size:12px;font-weight:700;padding:3px 10px;border-radius:8px}
 
 /* Month comparison */
 .month-bar{margin-bottom:12px}
@@ -101,7 +101,7 @@ h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:var(--text-hi);margin-bo
 /* Divider */
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--line-soft),transparent);margin:48px 0}
 
-footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-top:1px solid var(--line-hair)}
+footer{text-align:center;padding:40px;color:var(--text-3);font-size:13px;border-top:1px solid var(--line-hair)}
 @media(max-width:600px){
   .container{padding:32px 14px}
   .hero{padding:40px 16px 32px}
@@ -110,8 +110,8 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   .cards-2,.cards-3{grid-template-columns:1fr}
   .score-card{min-width:calc(50% - 8px);flex:1 1 calc(50% - 8px);padding:12px 10px}
   .score-card .grade{font-size:26px}
-  .data-table{font-size:12px;min-width:460px}
-  .data-table th{padding:8px 10px;font-size:9px}
+  .data-table{font-size:13px;min-width:520px}
+  .data-table th{padding:8px 10px;font-size:12px}
   .data-table td{padding:8px 10px}
   .sec-title{font-size:18px}
   .sec-header{gap:10px;margin-bottom:20px}
@@ -169,7 +169,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   </div>
 </div>
 
-<div class="container">
+<main class="container">
 
 <!-- CHARTS_HEALTH:START -->
 <div class="section">
@@ -177,7 +177,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">🎯</div>
     <div>
-      <div class="sec-title">Прогресс к цели</div>
+      <h2 class="sec-title">Прогресс к цели</h2>
       <div class="sec-sub">Вес: точки — замеры, линия — сглаженный тренд</div>
     </div>
   </div>
@@ -199,7 +199,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#f59e0b,#d97706)">🍽</div>
     <div>
-      <div class="sec-title">Питание сегодня</div>
+      <h2 class="sec-title">Питание сегодня</h2>
       <div class="sec-sub">Кольца — цель дня · столбики — калории за 7 дней</div>
     </div>
   </div>
@@ -215,7 +215,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">🔬</div>
     <div>
-      <div class="sec-title">Анализы — ключевые маркеры</div>
+      <h2 class="sec-title">Анализы — ключевые маркеры</h2>
       <div class="sec-sub">🟩 референс · точка — значение (🔴 вне нормы). Полная таблица ниже.</div>
     </div>
   </div>
@@ -306,7 +306,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#e94560,#c73652)">!</div>
     <div>
-      <div class="sec-title">Ключевые находки</div>
+      <h2 class="sec-title">Ключевые находки</h2>
       <div class="sec-sub">Что данные говорят о 6 месяцах</div>
     </div>
   </div>
@@ -353,7 +353,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">2</div>
     <div>
-      <div class="sec-title">Динамика по месяцам</div>
+      <h2 class="sec-title">Динамика по месяцам</h2>
       <div class="sec-sub">Корреляция сна, веса и пульса</div>
     </div>
   </div>
@@ -392,13 +392,14 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#0891b2,#0e7490)">W</div>
     <div>
-      <div class="sec-title">Еженедельный прогресс</div>
+      <h2 class="sec-title">Еженедельный прогресс</h2>
       <div class="sec-sub">Обновляется автоматически каждую неделю из Apple Health · последняя неделя сверху</div>
     </div>
   </div>
 
   <div class="table-wrap">
     <table class="data-table">
+      <caption class="sr-only">Еженедельный прогресс: вес, сон, пульс, шаги и тренировки по неделям</caption>
       <thead><tr>
         <th>Неделя</th><th>Вес ср.</th><th>% Жира</th>
         <th>Сон</th><th>Глуб. сон</th><th>Ночей &lt;7ч</th>
@@ -427,7 +428,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#22c55e,#16a34a)">К</div>
     <div>
-      <div class="sec-title">Питание — план и факт</div>
+      <h2 class="sec-title">Питание — план и факт</h2>
       <div class="sec-sub">Цель на день, факт по итогу дня и накопление за неделю · обновляется автоматически</div>
     </div>
   </div>
@@ -458,6 +459,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
 
   <div class="table-wrap">
     <table class="data-table">
+      <caption class="sr-only">Питание по дням: калории и БЖУ против дневной цели</caption>
       <thead><tr>
         <th>Дата</th><th>Калории</th><th>vs цель</th>
         <th>Белки</th><th>Жиры</th><th>Углеводы</th><th>Приёмов</th>
@@ -497,7 +499,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">3</div>
     <div>
-      <div class="sec-title">Сон</div>
+      <h2 class="sec-title">Сон</h2>
       <div class="sec-sub">Восстановление, на котором стоят вес и нагрузка</div>
     </div>
   </div>
@@ -573,7 +575,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#e94560,#c73652)">4</div>
     <div>
-      <div class="sec-title">Тренировочный процесс</div>
+      <h2 class="sec-title">Тренировочный процесс</h2>
       <div class="sec-sub">Теннис + Хоккей · 5×/нед · коррекция под данные</div>
     </div>
   </div>
@@ -638,7 +640,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#22c55e,#16a34a)">5</div>
     <div>
-      <div class="sec-title">Питание</div>
+      <h2 class="sec-title">Питание</h2>
       <div class="sec-sub">Скорректировано под семаглутид + реальные данные активности</div>
     </div>
   </div>
@@ -704,7 +706,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#0891b2,#0e7490)">6</div>
     <div>
-      <div class="sec-title">Фармакологический протокол</div>
+      <h2 class="sec-title">Фармакологический протокол</h2>
       <div class="sec-sub">Semavic Next + Овитрель · оценка и рекомендации</div>
     </div>
   </div>
@@ -752,7 +754,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">7</div>
     <div>
-      <div class="sec-title">Ноотропный стек</div>
+      <h2 class="sec-title">Ноотропный стек</h2>
       <div class="sec-sub">Ноопепт + Альфа-GPC + Ежовик · оценка и тайминг</div>
     </div>
   </div>
@@ -800,7 +802,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">🔬</div>
     <div>
-      <div class="sec-title">Анализы — динамика по кварталам</div>
+      <h2 class="sec-title">Анализы — динамика по кварталам</h2>
       <div class="sec-sub">ИНВИТРО · последний забор 10.07.2026 · 🟢 в норме · 🔴 вне референса</div>
     </div>
   </div>
@@ -906,7 +908,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#f59e0b,#d97706)">8</div>
     <div>
-      <div class="sec-title">Стек добавок: текущий и коррекции</div>
+      <h2 class="sec-title">Стек добавок: текущий и коррекции</h2>
       <div class="sec-sub">Актуальный протокол · что уже принимается и что скорректировать</div>
     </div>
   </div>
@@ -916,6 +918,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
 
   <div class="table-wrap" style="margin-bottom:24px">
     <table class="data-table">
+      <caption class="sr-only">Что принимается сейчас: доза, время приёма, класс и комментарий по каждой позиции</caption>
       <thead><tr><th>Позиция</th><th>Доза / Время</th><th>Класс</th><th>Комментарий</th></tr></thead>
       <tbody>
         <tr><td><strong>Semavic Next (семаглутид)</strong></td><td>0.75 мг по циклу</td><td><span class="rec-tag tag-blue">Клиническое</span></td><td>За 6 месяцев −1.5 кг при ожидаемых 4.5–7 кг — эффект ниже ожидаемого. Гипотеза «недосыпание блокирует GLP-1» снята пересчётом 16.07. Вопрос дозы и частоты — к врачу, по динамике веса и дневнику питания.</td></tr>
@@ -970,6 +973,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6666aa;font-weight:700;margin:24px 0 10px;padding-left:4px">➕ Рекомендуется добавить</div>
   <div class="table-wrap">
     <table class="data-table">
+      <caption class="sr-only">Рекомендуется добавить: позиция, доза, зачем и приоритет</caption>
       <thead><tr><th>Позиция</th><th>Доза</th><th>Зачем</th><th>Приоритет</th></tr></thead>
       <tbody>
         <tr><td><strong>Коллаген + Вит. C</strong></td><td>15 г + 200 мг за 30 мин до тренировки</td><td>Хрящи и связки при 5 нагрузках в неделю. После 40 лет синтез коллагена снижается примерно на 1% в год.</td><td><span class="rec-tag tag-blue">Рекомендуется</span></td></tr>
@@ -986,7 +990,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#e94560,#c73652)">★</div>
     <div>
-      <div class="sec-title">План на следующие 30 дней</div>
+      <h2 class="sec-title">План на следующие 30 дней</h2>
     </div>
   </div>
 
@@ -1044,7 +1048,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <div class="sec-header">
     <div class="sec-num" style="background:linear-gradient(135deg,#22c55e,#16a34a)">→</div>
     <div>
-      <div class="sec-title">Прогноз при выполнении рекомендаций</div>
+      <h2 class="sec-title">Прогноз при выполнении рекомендаций</h2>
       <div class="sec-sub">Реалистичные цели на 3–4 месяца</div>
     </div>
   </div>
@@ -1069,7 +1073,7 @@ footer{text-align:center;padding:40px;color:var(--text-3);font-size:11px;border-
   <!-- FORECAST:END -->
 </div>
 
-</div>
+</main>
 
 <footer>
   <!-- FOOTER:START -->
