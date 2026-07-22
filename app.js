@@ -8,7 +8,11 @@
   var SCREENS = [
     { id: "obzor",    icon: "🏠", label: "Обзор" },
     { id: "pitanie",  icon: "🍽", label: "Питание" },
-    { id: "vosst",    icon: "😴", label: "Восст." },
+    // «Восстановление» named one fifth of what is here (sleep) and was already truncated to
+    // «Восст.» in the bar. The tab is weight-to-goal, sleep, training and their weekly and
+    // monthly series — all of it change over time. The id stays `vosst` on purpose: it is
+    // internal (screen-vosst) and renaming it buys nothing but churn.
+    { id: "vosst",    icon: "📈", label: "Динамика" },
     { id: "analizy",  icon: "🔬", label: "Анализы" },
     { id: "protokol", icon: "💊", label: "Протокол" }
   ];
