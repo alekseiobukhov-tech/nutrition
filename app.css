@@ -144,7 +144,11 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
   --line-hair:#00000010;
   --tabbar-bg:rgba(248,250,253,0.78);
   /* проверено на обоих светлых фонах (#fff и #eef1f6), оба ≥4.5:1 */
-  --good:#137a3a; --bad:#be123c; --warn:#8a5a00; --info:#1d4ed8;
+  /* --warn: жёлтое золото (тон 51°), а не оранжево-коричневый #8a5a00 (39°) — выбор Алексея
+     23.07 «хочу жёлтые в светлой». Ярче на белом мелкий текст не читается (потолок ~4.5:1);
+     #7d6a00 = 5.34/4.72. Свет и тьма теперь один семантический смысл, но разные значения:
+     тьма #facc15 (яркий жёлтый на чёрном), свет #7d6a00 (золото на белом). */
+  --good:#137a3a; --bad:#be123c; --warn:#7d6a00; --info:#1d4ed8;
   --accent:#155e75; --accent-dim:#0e7490; --violet:#6d28d9;
   --toggle-edge:#00000024;
 }
@@ -270,6 +274,13 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
 :root[data-theme="light"] svg [fill="#ffffff10"],
 :root[data-theme="light"] svg [fill="#ffffff12"],
 :root[data-theme="light"] svg [fill="#ffffff14"]{fill:#0000000d}
+
+/* Светофор в СВЕТЛОЙ теме — жёлтое золото вместо оранжевого. Текст warn идёт через
+   var(--warn)=#7d6a00 (выше). Здесь — то, что мимо var: столбцы графиков (fill) и классовые
+   теги/алерты (их текст #fbbf24 на белом давал 1.67:1 — латентный баг, чинится заодно). */
+:root[data-theme="light"] svg [fill="#f59e0b"]{fill:#c9970a}   /* бар: золото, крупная заливка терпит ~2.9:1 как оранжевая раньше */
+:root[data-theme="light"] .tag-yellow{color:#7d6a00; background:#7d6a0018; border-color:#7d6a0040}
+:root[data-theme="light"] .alert-yellow{background:#7d6a0012; border-color:#7d6a0040}
 
 /* ---- Floating theme toggle ---- */
 .theme-toggle{
