@@ -22,7 +22,19 @@ body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
 
 .screen { animation: scr .18s ease; }
 @keyframes scr { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .screen { animation: none; } }
+/* Уважать системный запрос «меньше движения» — по ВСЕМУ приложению, а не только смене экрана.
+   На странице ~7 источников движения (переходы табов/плиток/тоггла/summary, всплытие экрана,
+   свечение активной иконки). Узкое `.screen{animation:none}` глушило один. Ковровое правило
+   сводит ЛЮБУЮ анимацию/переход к мгновенному, не ломая конечное состояние (duration→0, не
+   удаление свойства). Сторож page_audit.motion_problems следит, что оно есть и универсально. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* ---- bottom tab bar ---- */
 .tabbar {
@@ -39,6 +51,7 @@ body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
 }
 .tab {
   position: relative; flex: 1;
+  min-height: 44px;                               /* HIG/WCAG 2.5.5: зона нажатия ≥44px (бар и так 68) */
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
   background: none; border: none; color: var(--text-3);
   font-family: inherit; cursor: pointer;
@@ -63,6 +76,7 @@ body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
 details.collapse { margin: var(--s3) 0; }
 details.collapse > summary {
   list-style: none; cursor: pointer;
+  min-height: 44px;                               /* HIG/WCAG 2.5.5: раскрывашка — полноразмерная зона нажатия */
   display: flex; align-items: center; gap: 8px;
   padding: 12px 14px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
@@ -201,9 +215,9 @@ details.collapse[open] > summary { border-radius: 12px 12px 0 0; }
 .freshness.off  {background:#e9456020; color:var(--bad);  border-bottom:1px solid #e9456040}
 .freshness.stale{background:#facc1520; color:var(--warn); border-bottom:1px solid #facc1540}
 .freshness-btn{
-  font:inherit; padding:4px 12px; border-radius:999px; cursor:pointer;
+  font:inherit; padding:4px 14px; border-radius:999px; cursor:pointer;
   background:var(--surface); color:var(--text); border:1px solid var(--line-2);
-  min-height:32px;
+  min-height:44px;                                /* было 32 — ниже HIG/WCAG-минимума зоны нажатия */
 }
 
 /* ---- Retrofit: recolor generator-emitted inline/SVG neutrals in light mode ----

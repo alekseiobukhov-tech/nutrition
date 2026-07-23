@@ -37,6 +37,14 @@
     return null;
   }
 
+  // Открытие конкретной вкладки по адресу (#pitanie, #analizy …) — ради ярлыков манифеста
+  // (shortcuts) и чтобы вкладку можно было сохранить/поделиться. Возвращает id только если
+  // это реальный экран, иначе null (мусор в хэше молча игнорируется).
+  function fromHash() {
+    var h = (location.hash || "").replace(/^#/, "");
+    return SCREENS.some(function (s) { return s.id === h; }) ? h : null;
+  }
+
   /* ---- Честность данных ---------------------------------------------------
      Приложение по своей природе показывает прошлое: в офлайне service worker отдаёт кэш, а
      онлайн страница ровно так же свежа, как последний прогон генератора. 21–22.07 ежечасная
@@ -186,10 +194,14 @@
       });
       var hero = document.querySelector(".hero");
       if (hero) hero.style.display = id === "obzor" ? "" : "none";
+      // адрес держим в синхроне без засорения истории — чтобы ярлык подсвечивал свою вкладку
+      try { if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id); } catch (e) {}
       window.scrollTo(0, 0);
     }
     window.__showScreen = show;
-    show("obzor");
+    // хэш при запуске (ярлык/закладка) → эта вкладка, иначе «Обзор»; смена хэша на лету тоже ведёт
+    window.addEventListener("hashchange", function () { var h = fromHash(); if (h) show(h); });
+    show(fromHash() || "obzor");
   }
 
   /* Новая версия в standalone приходит молча: service worker делает skipWaiting и подменяет
